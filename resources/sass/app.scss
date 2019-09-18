@@ -1,0 +1,25 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+$fa-font-path: "../webfonts";
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~admin-lte/dist/css/adminlte.css';
+
+@import '~overlayscrollbars/css/OverlayScrollbars.css';
+
+.router-link-exact-active{
+	background-color: #e83e8c;
+	color: #fff !important;
+}
+
+.uppercase{
+    text-transform: capitalize;
+}
