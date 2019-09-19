@@ -1839,8 +1839,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1858,11 +1856,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    //newModal()
-    //{
-    //  this.form.reset();
-    //  $('#addNew').modal('show');
-    //},
+    treatmentX: function treatmentX() {
+      this.form.reset();
+      $('#treatmentModal').modal('show');
+    },
     loadTreatment: function loadTreatment() {
       var _this = this;
 
@@ -48628,28 +48625,14 @@ var render = function() {
                         {
                           staticClass: "btn btn-primary btn-sm",
                           attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.editModal(_vm.user)
-                            }
-                          }
+                          on: { click: _vm.treatmentX }
                         },
-                        [_c("i", { staticClass: "fas fa-edit" })]
-                      ),
-                      _vm._v(
-                        "\n                                |\n                                "
-                      ),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteUser(_vm.user.id)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-trash red" })]
+                        [
+                          _vm._v(
+                            "Treatment \n                                    "
+                          ),
+                          _c("i", { staticClass: "fas fa-file-prescription" })
+                        ]
                       )
                     ])
                   ])
@@ -48667,10 +48650,10 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "addNew",
+          id: "treatmentModal",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "addNewLabel",
+          "aria-labelledby": "treatmentModalLabel",
           "aria-hidden": "true"
         }
       },
@@ -48696,260 +48679,41 @@ var render = function() {
                   }
                 },
                 [
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.firstname,
-                              expression: "form.firstname"
-                            }
-                          ],
-                          staticClass: "form-control ucfirst",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("firstname")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "firstname",
-                            placeholder: "Firstname"
-                          },
-                          domProps: { value: _vm.form.firstname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "firstname",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "firstname" }
-                        })
-                      ],
-                      1
-                    ),
+                  _c("img", {
+                    staticStyle: { height: "350px", float: "right" },
+                    attrs: { src: "img/Tooth Legend.png" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body col-md-6" }, [
+                    _c("label", [_vm._v("Patient")]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.middlename,
-                              expression: "form.middlename"
-                            }
-                          ],
-                          staticClass: "form-control ucfirst",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("middlename")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "middlename",
-                            placeholder: "Middlename"
-                          },
-                          domProps: { value: _vm.form.middlename },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "middlename",
-                                $event.target.value
-                              )
-                            }
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.patiet,
+                            expression: "form.patiet"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "middlename" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.lastname,
-                              expression: "form.lastname"
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "patient",
+                          placeholder: "Status"
+                        },
+                        domProps: { value: _vm.form.patiet },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          ],
-                          staticClass: "form-control ucfirst",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("lastname")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "lastname",
-                            placeholder: "Lastname"
-                          },
-                          domProps: { value: _vm.form.lastname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "lastname",
-                                $event.target.value
-                              )
-                            }
+                            _vm.$set(_vm.form, "patiet", $event.target.value)
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "lastname" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.age,
-                              expression: "form.age"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("age") },
-                          attrs: {
-                            type: "text",
-                            name: "age",
-                            placeholder: "Age"
-                          },
-                          domProps: { value: _vm.form.age },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "age", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "age" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.address,
-                              expression: "form.address"
-                            }
-                          ],
-                          staticClass: "form-control ucfirst",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("address")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "address",
-                            placeholder: "Address"
-                          },
-                          domProps: { value: _vm.form.address },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "address", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "address" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.contact_no,
-                              expression: "form.contact_no"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("contact_no")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "contact_no",
-                            placeholder: "Contact No."
-                          },
-                          domProps: { value: _vm.form.contact_no },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "contact_no",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "contact_no" }
-                        })
-                      ],
-                      1
-                    ),
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -48993,19 +48757,39 @@ var render = function() {
                           },
                           [
                             _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Patient Type")
+                              _vm._v("Tooth No.")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "Brace" } }, [
-                              _vm._v("Brace")
+                            _c("option", { attrs: { value: "1-1 Incisors" } }, [
+                              _vm._v("1-1 Incisors")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "Extraction" } }, [
-                              _vm._v("Extraction")
+                            _c("option", { attrs: { value: "1-2 Incisors" } }, [
+                              _vm._v("1-2 Incisors")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "Denture" } }, [
-                              _vm._v("Denture")
+                            _c("option", { attrs: { value: "1-3 Canine" } }, [
+                              _vm._v("1-3 Canine")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1-4 Premolar" } }, [
+                              _vm._v("1-4 Premolar")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1-5 Premolar" } }, [
+                              _vm._v("1-5 Premolar")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1-6 Molar" } }, [
+                              _vm._v("1-6 Molar")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1-7 Molar" } }, [
+                              _vm._v("1-7 Molar")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1-8 Molar" } }, [
+                              _vm._v("1-8 Molar")
                             ])
                           ]
                         ),
@@ -49015,10 +48799,64 @@ var render = function() {
                         })
                       ],
                       1
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.lastname,
+                              expression: "form.lastname"
+                            }
+                          ],
+                          staticClass: "form-control ucfirst",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("lastname")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "lastname",
+                            placeholder: "Status"
+                          },
+                          domProps: { value: _vm.form.lastname },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "lastname",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "lastname" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._v("\n                     \n                    ")
+                    ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(6)
                 ]
               )
             ])
@@ -49034,7 +48872,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Treatment")]),
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Brace Patients")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-tools" })
     ])
@@ -49051,9 +48889,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Tooth No.")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Procedure")]),
+        _c("th", [_vm._v("Treatment")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Amount Charge")]),
+        _c("th", [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", [_vm._v("Amount Paid")]),
         _vm._v(" "),
@@ -49070,9 +48908,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "addNewLabel" } }, [
-        _vm._v("Add Patient")
-      ]),
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "treatmentModalLabel" } },
+        [_vm._v("Treatment")]
+      ),
       _vm._v(" "),
       _c(
         "button",
@@ -49086,6 +48926,49 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { id: "inputExperience", placeholder: "Treatment" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c("div", { staticClass: "input-group-prepend" }, [
+          _c("span", { staticClass: "input-group-text" }, [_vm._v("₱")])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Amount Charge" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append" }, [
+          _c("span", { staticClass: "input-group-text" }, [_vm._v(".00")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { id: "inputExperience", placeholder: "Notes" }
+      })
     ])
   },
   function() {

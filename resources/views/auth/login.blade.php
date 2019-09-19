@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="container">
-    <div class="login-box mt-2">
+    <div class="login-box mt-4">
 <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
           <div class="login-logo">
-            <img style="height: 120px;" src="img/clinick1.png">
+            <img style="height: 140px;" src="img/clinick1.png">
         </a>
     </div>
-      <p class="login-logo">Login</p>
+      {{-- <p class="login-logo">Login</p> --}}
       <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="input-group mb-3">
