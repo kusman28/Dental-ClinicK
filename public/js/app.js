@@ -1977,9 +1977,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      patients: {},
+      form: new Form({
+        id: '',
+        fullname: '',
+        firstname: '',
+        middlename: '',
+        lastname: '',
+        age: '',
+        address: '',
+        contact_no: '',
+        type: ''
+      })
+    };
+  },
+  methods: {
+    loadPatients: function loadPatients() {
+      var _this = this;
+
+      axios.get('api/patient').then(function (_ref) {
+        var data = _ref.data;
+        return _this.patients = data.data;
+      });
+    }
+  },
+  created: function created() {
+    this.loadPatients();
   }
 });
 
@@ -49041,99 +49068,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12 mt-5" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text" }, [
+                  _vm._v("Patient")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-number" }, [
+                  _vm._v(
+                    "\n                            \n                          " +
+                      _vm._s(_vm.patients.length) +
+                      "\n                          "
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "clearfix hidden-md-up" }),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3)
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-12 mt-5" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-              _c("div", { staticClass: "info-box" }, [
-                _c(
-                  "span",
-                  { staticClass: "info-box-icon bg-info elevation-1" },
-                  [_c("i", { staticClass: "fas fa-users" })]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "info-box-content" }, [
-                  _c("span", { staticClass: "info-box-text" }, [
-                    _vm._v("Patient")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "info-box-number" }, [
-                    _vm._v(
-                      "\n                          10\n                          "
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-              _c("div", { staticClass: "info-box mb-3" }, [
-                _c(
-                  "span",
-                  { staticClass: "info-box-icon bg-danger elevation-1" },
-                  [_c("i", { staticClass: "fas fa-thumbs-up" })]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "info-box-content" }, [
-                  _c("span", { staticClass: "info-box-text" }, [
-                    _vm._v("Likes")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "info-box-number" }, [
-                    _vm._v("41,410")
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix hidden-md-up" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-              _c("div", { staticClass: "info-box mb-3" }, [
-                _c(
-                  "span",
-                  { staticClass: "info-box-icon bg-success elevation-1" },
-                  [_c("i", { staticClass: "fas fa-shopping-cart" })]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "info-box-content" }, [
-                  _c("span", { staticClass: "info-box-text" }, [_vm._v("ss")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "info-box-number" }, [
-                    _vm._v("760")
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-              _c("div", { staticClass: "info-box mb-3" }, [
-                _c(
-                  "span",
-                  { staticClass: "info-box-icon bg-warning elevation-1" },
-                  [_c("i", { staticClass: "fas fa-users" })]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "info-box-content" }, [
-                  _c("span", { staticClass: "info-box-text" }, [
-                    _vm._v("New Members")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "info-box-number" }, [
-                    _vm._v("2,000")
-                  ])
-                ])
-              ])
-            ])
-          ])
+    return _c("span", { staticClass: "info-box-icon bg-info elevation-1" }, [
+      _c("i", { staticClass: "fas fa-users" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+      _c("div", { staticClass: "info-box mb-3" }, [
+        _c("span", { staticClass: "info-box-icon bg-danger elevation-1" }, [
+          _c("i", { staticClass: "fas fa-thumbs-up" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "info-box-content" }, [
+          _c("span", { staticClass: "info-box-text" }, [_vm._v("Likes")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "info-box-number" }, [_vm._v("41,410")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+      _c("div", { staticClass: "info-box mb-3" }, [
+        _c("span", { staticClass: "info-box-icon bg-success elevation-1" }, [
+          _c("i", { staticClass: "fas fa-shopping-cart" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "info-box-content" }, [
+          _c("span", { staticClass: "info-box-text" }, [_vm._v("ss")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "info-box-number" }, [_vm._v("760")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+      _c("div", { staticClass: "info-box mb-3" }, [
+        _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
+          _c("i", { staticClass: "fas fa-users" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "info-box-content" }, [
+          _c("span", { staticClass: "info-box-text" }, [_vm._v("New Members")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "info-box-number" }, [_vm._v("2,000")])
         ])
       ])
     ])

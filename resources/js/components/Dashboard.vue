@@ -10,7 +10,8 @@
                       <div class="info-box-content">
                         <span class="info-box-text">Patient</span>
                         <span class="info-box-number">
-                          10
+                            
+                          {{patients.length}}
                           <!-- <small>%</small> -->
                       </span>
                   </div>
@@ -70,8 +71,31 @@
 
 <script>
 export default {
-    mounted() {
-        console.log('Component mounted.')
+    data(){
+      return {
+      patients: {},
+      form: new Form({
+        id: '',
+        fullname: '',
+        firstname: '',
+        middlename: '',
+        lastname: '',
+        age: '',
+        address: '',
+        contact_no: '',
+        type: ''
+      })
+      }
+    },
+    methods: {
+      loadPatients()
+    {
+      axios.get('api/patient').then(({ data }) => (this.patients = data.data));
     }
+    },
+      created(){
+    this.loadPatients();
+
+  },
 }
 </script>

@@ -85,6 +85,8 @@ class PatientController extends Controller
             'contact_no' => 'required|string|max:11',
         ]);
 
+        // Theres a bug in treatment table for patient name. :D
+
         $user = Patient::findOrFail($id);
 
         $user->update($request->all());
