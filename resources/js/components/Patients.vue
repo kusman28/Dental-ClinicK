@@ -26,13 +26,13 @@
 							<tbody>
 								<tr v-for="patient in patients" :key="patient.id">
 									<td>{{patient.id}}</td>
-									<td>{{patient.fullname}}</td>
+									<td>{{patient.firstname}} {{patient.middlename}} {{patient.lastname}}</td>
 									<td>{{patient.age}}</td>
 									<td>{{patient.address}}</td>
 									<td>{{patient.contact_no}}</td>
 									<td><span :class="[patient.type === 'Denture' ? 'badge-success' : (patient.type === 'Brace'?'badge-warning':'badge-primary'), 'badge badge-pill']">{{patient.type | upCase}}</span></td>
 			                      <td>
-			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(user)">
+			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(patient)">
 			                      		<i class="fas fa-edit"></i>
 			                      	</a>
 			                      	|
@@ -56,12 +56,13 @@
         	<div class="modal-dialog modal-dialog-centered" role="document">
         		<div class="modal-content">
         			<div class="modal-header">
-        				<h5 class="modal-title" id="addNewLabel">Add Patient</h5>
+        				<h5 v-show="!editmode" class="modal-title" id="addNewLabel">Add Patient</h5>
+        				<h5 v-show="editmode" class="modal-title" id="addNewLabel">Edit Patient</h5>
         				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
         					<span aria-hidden="true">&times;</span>
         				</button>
         			</div>
-        			<form @submit.prevent="createPatient">
+        			<form @submit.prevent="editmode ? updatePatient() : createPatient()">
         			<div class="modal-body">
         				<div class="form-group">
         					<input v-model="form.firstname" type="text" name="firstname"
@@ -111,7 +112,8 @@
         			</div>
         			<div class="modal-footer">
         				<button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-        				<button type="submit" class="btn btn-success btn-flat">Save</button>
+        				<button v-show="editmode" type="submit" class="btn btn-primary btn-flat">Update</button>
+        				<button v-show="!editmode" type="submit" class="btn btn-success btn-flat">Save</button>
         			</div>
         			</form>
         		</div>
@@ -125,8 +127,10 @@
 export default {
 	data() {
 		return {
+		editmode: false,
 			patients: {},
 			form: new Form({
+				id: '',
 				fullname: '',
 				firstname: '',
 				middlename: '',
@@ -139,6 +143,38 @@ export default {
 		}
 	},
 	methods: {
+		updatePatient()
+		{
+			this.$Progress.start();
+			this.form.put('api/patient/'+this.form.id)
+			.then(() => {
+			$('#addNew').modal('hide');
+			swal.fire(
+				'Updated!',
+				'Patient information updated.',
+				'success'
+				)
+				Fire.$emit('afterCreate');
+				this.$Progress.finish();
+			Fire.$emit('afterCreate');
+			})
+			.catch(() => {
+				this.$Progress.fail();
+			})
+		},
+		editModal(patient)
+		{
+			this.editmode = true;
+			this.form.reset();
+			$('#addNew').modal('show');
+			this.form.fill(patient);
+		},
+		newModal()
+		{
+			this.editmode = false;
+			this.form.reset();
+			$('#addNew').modal('show');
+		},
 		deletePatient(id)
 		{
 		swal.fire({
@@ -165,11 +201,6 @@ export default {
 					});
 				}
 			})
-		},
-		newModal()
-		{
-			this.form.reset();
-			$('#addNew').modal('show');
 		},
 		loadPatients()
 		{

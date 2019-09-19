@@ -2566,11 +2566,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      editmode: false,
       patients: {},
       form: new Form({
+        id: '',
         fullname: '',
         firstname: '',
         middlename: '',
@@ -2583,8 +2587,35 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    deletePatient: function deletePatient(id) {
+    updatePatient: function updatePatient() {
       var _this = this;
+
+      this.$Progress.start();
+      this.form.put('api/patient/' + this.form.id).then(function () {
+        $('#addNew').modal('hide');
+        swal.fire('Updated!', 'Patient information updated.', 'success');
+        Fire.$emit('afterCreate');
+
+        _this.$Progress.finish();
+
+        Fire.$emit('afterCreate');
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
+    },
+    editModal: function editModal(patient) {
+      this.editmode = true;
+      this.form.reset();
+      $('#addNew').modal('show');
+      this.form.fill(patient);
+    },
+    newModal: function newModal() {
+      this.editmode = false;
+      this.form.reset();
+      $('#addNew').modal('show');
+    },
+    deletePatient: function deletePatient(id) {
+      var _this2 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -2596,7 +2627,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          _this.form["delete"]('api/patient/' + id).then(function () {
+          _this2.form["delete"]('api/patient/' + id).then(function () {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('afterCreate');
           })["catch"](function () {
@@ -2605,20 +2636,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    newModal: function newModal() {
-      this.form.reset();
-      $('#addNew').modal('show');
-    },
     loadPatients: function loadPatients() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('api/patient').then(function (_ref) {
         var data = _ref.data;
-        return _this2.patients = data.data;
+        return _this3.patients = data.data;
       });
     },
     createPatient: function createPatient() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       this.form.post('api/patient').then(function () {
@@ -2629,18 +2656,18 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Patient added successfully.'
         });
 
-        _this3.$Progress.finish();
+        _this4.$Progress.finish();
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this4.$Progress.fail();
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadPatients();
     Fire.$on('afterCreate', function () {
-      _this4.loadPatients();
+      _this5.loadPatients();
     });
   }
 });
@@ -50944,7 +50971,15 @@ var render = function() {
                   return _c("tr", { key: patient.id }, [
                     _c("td", [_vm._v(_vm._s(patient.id))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(patient.fullname))]),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(patient.firstname) +
+                          " " +
+                          _vm._s(patient.middlename) +
+                          " " +
+                          _vm._s(patient.lastname)
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(patient.age))]),
                     _vm._v(" "),
@@ -50977,7 +51012,7 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.editModal(_vm.user)
+                              return _vm.editModal(patient)
                             }
                           }
                         },
@@ -51030,7 +51065,43 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.editmode,
+                        expression: "!editmode"
+                      }
+                    ],
+                    staticClass: "modal-title",
+                    attrs: { id: "addNewLabel" }
+                  },
+                  [_vm._v("Add Patient")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "h5",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.editmode,
+                        expression: "editmode"
+                      }
+                    ],
+                    staticClass: "modal-title",
+                    attrs: { id: "addNewLabel" }
+                  },
+                  [_vm._v("Edit Patient")]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -51038,7 +51109,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createPatient($event)
+                      _vm.editmode ? _vm.updatePatient() : _vm.createPatient()
                     }
                   }
                 },
@@ -51365,7 +51436,50 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-flat",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-primary btn-flat",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-success btn-flat",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Save")]
+                    )
+                  ])
                 ]
               )
             ])
@@ -51402,45 +51516,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "addNewLabel" } }, [
-        _vm._v("Add Patient")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger btn-flat",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success btn-flat", attrs: { type: "submit" } },
-        [_vm._v("Save")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

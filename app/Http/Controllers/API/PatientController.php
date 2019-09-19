@@ -75,7 +75,19 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'firstname' => 'required|string|max:15',
+            'middlename' => 'required|string|max:15',
+            'lastname' => 'required|string|max:15',
+            'age' => 'required|numeric|max:99',
+            'address' => 'required|string|max:50',
+            'contact_no' => 'required|string|max:11',
+        ]);
+
+        $user = Patient::findOrFail($id);
+
+        $user->update($request->all());
     }
 
     /**
@@ -92,7 +104,7 @@ class PatientController extends Controller
         $patientGroup = Patient::where('id', $patient->id)->get();
         \DB::table('treatments')->whereIn('id', $patientGroup->pluck('id'))->delete();
         Patient::where('id', $patient->id)->delete();
-        
+
         // $patient = Patient::findOrFail($id);
 
         // $patient->delete();
