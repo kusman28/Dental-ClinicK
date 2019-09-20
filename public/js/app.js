@@ -1978,21 +1978,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      patients: {},
-      form: new Form({
-        id: '',
-        fullname: '',
-        firstname: '',
-        middlename: '',
-        lastname: '',
-        age: '',
-        address: '',
-        contact_no: '',
-        type: ''
-      })
+      denture: {},
+      extraction: {},
+      treatments: {},
+      patients: {}
     };
   },
   methods: {
@@ -2002,6 +2011,18 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('api/patient').then(function (_ref) {
         var data = _ref.data;
         return _this.patients = data.data;
+      });
+      axios.get('treatment').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this.treatments = data.data;
+      });
+      axios.get('treatment/denture').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this.denture = data.data;
+      });
+      axios.get('treatment/extraction').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this.extraction = data.data;
       });
     }
   },
@@ -49087,18 +49108,125 @@ var render = function() {
                       _vm._s(_vm.patients.length) +
                       "\n                          "
                   )
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "small-box-footer", attrs: { href: "#" } },
+                  [_vm._v("\n                       \n                      ")]
+                )
               ])
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "info-box-content" },
+                [
+                  _c("span", { staticClass: "info-box-text" }, [
+                    _vm._v("Brace")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "info-box-number" }, [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.treatments.length) +
+                        "\n              "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: "/brace" }
+                    },
+                    [
+                      _vm._v("More info\n                  "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "clearfix hidden-md-up" }),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "info-box-content" },
+                [
+                  _c("span", { staticClass: "info-box-text" }, [
+                    _vm._v("Extraction")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "info-box-number" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.extraction.length) +
+                        "\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: "/extraction" }
+                    },
+                    [
+                      _vm._v("More info\n                  "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(3)
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "info-box-content" },
+                [
+                  _c("span", { staticClass: "info-box-text" }, [
+                    _vm._v("Denture")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "info-box-number" }, [
+                    _vm._v(_vm._s(_vm.denture.length))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: "/denture" }
+                    },
+                    [
+                      _vm._v("More info\n              "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
         ])
       ])
     ])
@@ -49117,54 +49245,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-      _c("div", { staticClass: "info-box mb-3" }, [
-        _c("span", { staticClass: "info-box-icon bg-danger elevation-1" }, [
-          _c("i", { staticClass: "fas fa-thumbs-up" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "info-box-content" }, [
-          _c("span", { staticClass: "info-box-text" }, [_vm._v("Likes")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "info-box-number" }, [_vm._v("41,410")])
-        ])
-      ])
+    return _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
+      _c("i", { staticClass: "fas fa-teeth nav-icon" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-      _c("div", { staticClass: "info-box mb-3" }, [
-        _c("span", { staticClass: "info-box-icon bg-success elevation-1" }, [
-          _c("i", { staticClass: "fas fa-shopping-cart" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "info-box-content" }, [
-          _c("span", { staticClass: "info-box-text" }, [_vm._v("ss")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "info-box-number" }, [_vm._v("760")])
-        ])
-      ])
+    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
+      _c("i", { staticClass: "fas fa-tooth nav-icon" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-      _c("div", { staticClass: "info-box mb-3" }, [
-        _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
-          _c("i", { staticClass: "fas fa-users" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "info-box-content" }, [
-          _c("span", { staticClass: "info-box-text" }, [_vm._v("New Members")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "info-box-number" }, [_vm._v("2,000")])
-        ])
-      ])
+    return _c("span", { staticClass: "info-box-icon bg-success elevation-1" }, [
+      _c("i", { staticClass: "fas fa-teeth-open nav-icon" })
     ])
   }
 ]

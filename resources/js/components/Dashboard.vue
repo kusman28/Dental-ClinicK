@@ -14,6 +14,9 @@
                           {{patients.length}}
                           <!-- <small>%</small> -->
                       </span>
+                      <a href="#" class="small-box-footer">
+                      &nbsp;
+                      </a>
                   </div>
                   <!-- /.info-box-content -->
               </div>
@@ -22,11 +25,16 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-teeth nav-icon"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Brace</span>
+                <span class="info-box-number">
+                {{treatments.length}}
+              </span>
+              <router-link to="/brace" class="small-box-footer">More info
+                  <i class="fas fa-arrow-circle-right"></i>
+                </router-link>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -39,11 +47,16 @@
 
     <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3">
-          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+          <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-tooth nav-icon"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">ss</span>
-            <span class="info-box-number">760</span>
+            <span class="info-box-text">Extraction</span>
+            <span class="info-box-number">
+              {{extraction.length}}
+            </span>
+              <router-link to="/extraction" class="small-box-footer">More info
+                  <i class="fas fa-arrow-circle-right"></i>
+                </router-link>
         </div>
         <!-- /.info-box-content -->
     </div>
@@ -52,11 +65,15 @@
 <!-- /.col -->
 <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box mb-3">
-      <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-teeth-open nav-icon"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">New Members</span>
-        <span class="info-box-number">2,000</span>
+        <span class="info-box-text">Denture</span>
+        <span class="info-box-number">{{denture.length}}</span>
+
+          <router-link to="/denture" class="small-box-footer">More info
+              <i class="fas fa-arrow-circle-right"></i>
+            </router-link>
     </div>
     <!-- /.info-box-content -->
 </div>
@@ -73,25 +90,20 @@
 export default {
     data(){
       return {
+      denture: {},
+      extraction: {},
+      treatments: {},
       patients: {},
-      form: new Form({
-        id: '',
-        fullname: '',
-        firstname: '',
-        middlename: '',
-        lastname: '',
-        age: '',
-        address: '',
-        contact_no: '',
-        type: ''
-      })
       }
     },
     methods: {
       loadPatients()
     {
       axios.get('api/patient').then(({ data }) => (this.patients = data.data));
-    }
+      axios.get('treatment').then(({ data }) => (this.treatments = data.data));
+      axios.get('treatment/denture').then(({ data }) => (this.denture = data.data));
+      axios.get('treatment/extraction').then(({ data }) => (this.extraction = data.data));
+    },
     },
       created(){
     this.loadPatients();
