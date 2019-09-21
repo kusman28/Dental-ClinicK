@@ -20,9 +20,11 @@ Auth::routes();
 Route::get('treatment', 'TreatmentController@index');
 Route::get('treatment/denture', 'TreatmentController@denture');
 Route::get('treatment/extraction', 'TreatmentController@extraction');
+// Route::put('treatment/update', 'TreatmentController@update');
 
 
-// Route::resources(['treatment' => 'TreatmentController']);
+Route::resources(['treatment' => 'TreatmentController']); 
+
 // Route::resources(['treatment' => 'DentureController']);
 // Route::resources(['brace' => 'BraceController']);
 // Route::resources(['treatment' => 'DentureController']);

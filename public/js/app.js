@@ -1839,11 +1839,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       treatments: {},
       form: new Form({
+        id: '',
         patient: '',
         tooth_no: '',
         procedure: '',
@@ -1856,42 +1920,63 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    treatmentX: function treatmentX() {
-      this.form.reset();
-      $('#treatmentModal').modal('show');
-    },
-    loadTreatment: function loadTreatment() {
+    updateTreatment: function updateTreatment() {
       var _this = this;
 
-      axios.get('treatment').then(function (_ref) {
-        var data = _ref.data;
-        return _this.treatments = data.data;
+      this.$Progress.start();
+      this.form.put('treatment/' + this.form.id).then(function () {
+        $('#treatmentModal').modal('hide');
+        swal.fire('Updated!', 'Patient information updated.', 'success');
+        Fire.$emit('afterCreate');
+
+        _this.$Progress.finish();
+
+        Fire.$emit('afterCreate');
+      })["catch"](function () {
+        _this.$Progress.fail();
       });
     },
-    createPatient: function createPatient() {
+    updateTreatment1: function updateTreatment1() {
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.post('api/patient').then(function () {
+      this.form.put('treatment/' + this.form.id).then(function () {
+        $('#treatmentModal1').modal('hide');
+        swal.fire('Updated!', 'Patient information updated.', 'success');
         Fire.$emit('afterCreate');
-        $('#addNew').modal('hide');
-        toast.fire({
-          type: 'success',
-          title: 'Patient added successfully.'
-        });
 
         _this2.$Progress.finish();
+
+        Fire.$emit('afterCreate');
       })["catch"](function () {
         _this2.$Progress.fail();
+      });
+    },
+    editTreatment: function editTreatment(treatment) {
+      this.form.reset();
+      $('#treatmentModal').modal('show');
+      this.form.fill(treatment);
+    },
+    editTreatment1: function editTreatment1(treatment) {
+      this.form.reset();
+      $('#treatmentModal1').modal('show');
+      this.form.fill(treatment);
+    },
+    loadTreatment: function loadTreatment() {
+      var _this3 = this;
+
+      axios.get('treatment').then(function (_ref) {
+        var data = _ref.data;
+        return _this3.treatments = data.data;
       });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.loadTreatment();
     Fire.$on('afterCreate', function () {
-      _this3.loadTreatment();
+      _this4.loadTreatment();
     });
   }
 });
@@ -2492,6 +2577,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -48655,42 +48741,24 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(treatment.tooth_no))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(treatment.procedure))]),
+                    _c("td", [_vm._v(_vm._s(treatment.status))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(treatment.amount_charge))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(treatment.amount_paid))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(treatment.balance))]),
+                    _c("td", [_vm._v("₱ " + _vm._s(treatment.amount_charge))]),
                     _vm._v(" "),
                     _c("td", [
                       _c(
                         "span",
                         {
                           class: [
-                            treatment.status === "On-going"
-                              ? "badge-warning"
-                              : treatment.status === "Done"
+                            treatment.amount_paid === "PAID"
                               ? "badge-success"
+                              : treatment.amount_paid === "UNPAID"
+                              ? "badge-danger"
                               : "badge-primary",
                             "badge badge-pill"
                           ]
                         },
-                        [
-                          _vm._v(
-                            _vm._s(_vm._f("upCase")(treatment.status)) +
-                              " \n                                    "
-                          ),
-                          _c("i", {
-                            class: [
-                              treatment.status === "On-going"
-                                ? "fas fa-clock"
-                                : treatment.status === "Done"
-                                ? "fas fa-check"
-                                : "badge-primary"
-                            ]
-                          })
-                        ]
+                        [_vm._v(_vm._s(treatment.amount_paid))]
                       )
                     ]),
                     _vm._v(" "),
@@ -48700,7 +48768,11 @@ var render = function() {
                         {
                           staticClass: "btn btn-primary btn-sm",
                           attrs: { href: "#" },
-                          on: { click: _vm.treatmentX }
+                          on: {
+                            click: function($event) {
+                              return _vm.editTreatment(treatment)
+                            }
+                          }
                         },
                         [
                           _vm._v(
@@ -48708,6 +48780,20 @@ var render = function() {
                           ),
                           _c("i", { staticClass: "fas fa-file-prescription" })
                         ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editTreatment1(treatment)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-check" })]
                       )
                     ])
                   ])
@@ -48749,7 +48835,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createPatient($event)
+                      return _vm.updateTreatment()
                     }
                   }
                 },
@@ -48768,23 +48854,24 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.patiet,
-                            expression: "form.patiet"
+                            value: _vm.form.patient,
+                            expression: "form.patient"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
                           name: "patient",
-                          placeholder: "Status"
+                          placeholder: "Patient",
+                          disabled: ""
                         },
-                        domProps: { value: _vm.form.patiet },
+                        domProps: { value: _vm.form.patient },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.form, "patiet", $event.target.value)
+                            _vm.$set(_vm.form, "patient", $event.target.value)
                           }
                         }
                       })
@@ -48801,15 +48888,15 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.type,
-                                expression: "form.type"
+                                value: _vm.form.tooth_no,
+                                expression: "form.tooth_no"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("type")
+                              "is-invalid": _vm.form.errors.has("tooth_no")
                             },
-                            attrs: { name: "type", id: "type" },
+                            attrs: { name: "tooth_no", id: "tooth_no" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -48822,7 +48909,7 @@ var render = function() {
                                   })
                                 _vm.$set(
                                   _vm.form,
-                                  "type",
+                                  "tooth_no",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -48870,13 +48957,38 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "type" }
+                          attrs: { form: _vm.form, field: "tooth_no" }
                         })
                       ],
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.procedure,
+                            expression: "form.procedure"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "procedure",
+                          placeholder: "Prescription"
+                        },
+                        domProps: { value: _vm.form.procedure },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "procedure", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -48887,51 +48999,310 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.lastname,
-                              expression: "form.lastname"
+                              value: _vm.form.status,
+                              expression: "form.status"
                             }
                           ],
                           staticClass: "form-control ucfirst",
                           class: {
-                            "is-invalid": _vm.form.errors.has("lastname")
+                            "is-invalid": _vm.form.errors.has("status")
                           },
                           attrs: {
                             type: "text",
-                            name: "lastname",
+                            name: "status",
                             placeholder: "Status"
                           },
-                          domProps: { value: _vm.form.lastname },
+                          domProps: { value: _vm.form.status },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(
-                                _vm.form,
-                                "lastname",
-                                $event.target.value
-                              )
+                              _vm.$set(_vm.form, "status", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "lastname" }
+                          attrs: { form: _vm.form, field: "status" }
                         })
                       ],
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(4),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.amount_charge,
+                                expression: "form.amount_charge"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("amount_charge")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "amount_charge",
+                              placeholder: "Amount Charge"
+                            },
+                            domProps: { value: _vm.form.amount_charge },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "amount_charge",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "amount_charge" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
                     _vm._v(" "),
-                    _vm._m(5),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.notes,
+                            expression: "form.notes"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "notes", placeholder: "Notes" },
+                        domProps: { value: _vm.form.notes },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "notes", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _vm._v("\n                     \n                    ")
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(5)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "treatmentModal1",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "treatmentModal1Label",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.updateTreatment1()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body col-md-8" }, [
+                    _c("label", [_vm._v("Patient")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.patient,
+                            expression: "form.patient"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "patient",
+                          placeholder: "Patient",
+                          disabled: ""
+                        },
+                        domProps: { value: _vm.form.patient },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "patient", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("Amount Charge")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(7),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.amount_charge,
+                                expression: "form.amount_charge"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("amount_charge")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "amount_charge",
+                              placeholder: "Amount Charge",
+                              disabled: ""
+                            },
+                            domProps: { value: _vm.form.amount_charge },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "amount_charge",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(8),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "amount_charge" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("Status")]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.amount_paid,
+                                expression: "form.amount_paid"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("amount_paid")
+                            },
+                            attrs: { name: "amount_paid", id: "amount_paid" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "amount_paid",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "PAID" } }, [
+                              _vm._v("PAID")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "UNPAID" } }, [
+                              _vm._v("UNPAID")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "amount_paid" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._v("\n                     \n                    ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(9)
                 ]
               )
             ])
@@ -48964,13 +49335,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Tooth No.")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Treatment")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Amount Paid")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Balance")]),
+        _c("th", [_vm._v("Amount Charge")]),
         _vm._v(" "),
         _c("th", [_vm._v("Status")]),
         _vm._v(" "),
@@ -49007,43 +49374,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "inputExperience", placeholder: "Treatment" }
-      })
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("₱")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "input-group" }, [
-        _c("div", { staticClass: "input-group-prepend" }, [
-          _c("span", { staticClass: "input-group-text" }, [_vm._v("₱")])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Amount Charge" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group-append" }, [
-          _c("span", { staticClass: "input-group-text" }, [_vm._v(".00")])
-        ])
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v(".00")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "inputExperience", placeholder: "Notes" }
-      })
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-flat",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success btn-flat", attrs: { type: "submit" } },
+        [_vm._v("Save")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "treatmentModal1Label" } },
+        [_vm._v("Treatment")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("₱")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v(".00")])
     ])
   },
   function() {
@@ -66756,6 +67158,9 @@ var routes = [{
   path: '/extraction',
   component: __webpack_require__(/*! ./components/Extraction */ "./resources/js/components/Extraction.vue")["default"]
 }, {
+  path: '/prescription',
+  component: __webpack_require__(/*! ./components/Prescription */ "./resources/js/components/Prescription.vue")["default"]
+}, {
   path: '/profile',
   component: __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue")["default"]
 }, {
@@ -67364,6 +67769,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Patients_vue_vue_type_template_id_31ca570e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Prescription.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/Prescription.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/Prescription.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 

@@ -46,7 +46,11 @@ class TreatmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return Treatment::create([
+        //     'patient' => $request['patient'],
+        //     'tooth_no' => $request['tooth_no'],
+        //     'type' => $request['type'],
+        // ]);
     }
 
     /**
@@ -80,7 +84,16 @@ class TreatmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'patient' => 'required|string|max:50',
+            'tooth_no' => 'string|max:15',
+            'amount_charge' => 'numeric|min:100',
+            'amount_paid' => 'max:100',
+        ]);
+
+        $treatment = Treatment::findOrFail($id);
+
+        $treatment->update($request->all());
     }
 
     /**

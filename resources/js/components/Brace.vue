@@ -17,11 +17,12 @@
                                     <th>ID</th>
                                     <th>Patient</th>
                                     <th>Tooth No.</th>
-                                    <th>Treatment</th>
+                                    <!-- <th>Prescription</th> -->
                                     <th>Status</th>
-                                    <th>Amount Paid</th>
-                                    <th>Balance</th>
+                                    <th>Amount Charge</th>
                                     <th>Status</th>
+                                    <!-- <th>Balance</th>
+                                    <th>Status</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -30,15 +31,22 @@
                                     <td>{{treatment.id}}</td>
                                     <td>{{treatment.patient}}</td>
                                     <td>{{treatment.tooth_no}}</td>
-                                    <td>{{treatment.procedure}}</td>
-                                    <td>{{treatment.amount_charge}}</td>
-                                    <td>{{treatment.amount_paid}}</td>
+                                    <!-- <td>{{treatment.procedure}}</td> -->
+                                    <td>{{treatment.status}}</td>
+                                    <td>₱ {{treatment.amount_charge}}</td>
+                                    <td><span :class="[treatment.amount_paid === 'PAID' ? 'badge-success' : (treatment.amount_paid === 'UNPAID'?'badge-danger':'badge-primary'), 'badge badge-pill']">{{treatment.amount_paid}}</span>
+                                    </td>
+                                    <!-- <td>{{treatment.amount_paid}}</td>
                                     <td>{{treatment.balance}}</td>
                                     <td><span :class="[treatment.status === 'On-going' ? 'badge-warning' : (treatment.status === 'Done'?'badge-success':'badge-primary'), 'badge badge-pill']">{{treatment.status | upCase}} 
                                         <i :class="[treatment.status === 'On-going' ? 'fas fa-clock' : (treatment.status === 'Done'?'fas fa-check':'badge-primary')]"></i></span></td>
+                                    -->
                                   <td>
-                                    <a href="#" class="btn btn-primary btn-sm" @click="treatmentX">Treatment 
+                                    <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">Treatment 
                                         <i class="fas fa-file-prescription"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)">
+                                        <i class="fas fa-check"></i>
                                     </a>
                                   </td>
                                 </tr>
@@ -62,17 +70,17 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="createPatient">
+                    <form @submit.prevent="updateTreatment()">
                     <img style="height: 350px; float: right;" src="img/Tooth Legend.png">
                     <div class="modal-body col-md-6">
                         <label>Patient</label>
                         <div class="form-group">
-                            <input v-model="form.patiet" type="text" name="patient"
-                            placeholder="Status" 
-                            class="form-control">
+                            <input v-model="form.patient" type="text" name="patient"
+                            placeholder="Patient" 
+                            class="form-control" disabled>
                         </div>
                         <div class="form-group">
-                            <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
+                            <select name="tooth_no" v-model="form.tooth_no" id="tooth_no" class="form-control" :class="{ 'is-invalid': form.errors.has('tooth_no') }">
                                 <option value="">Tooth No.</option>
                                 <option value="1-1 Incisors">1-1 Incisors</option>
                                 <option value="1-2 Incisors">1-2 Incisors</option>
@@ -83,30 +91,31 @@
                                 <option value="1-7 Molar">1-7 Molar</option>
                                 <option value="1-8 Molar">1-8 Molar</option>
                             </select>
-                            <has-error :form="form" field="type"></has-error>
+                            <has-error :form="form" field="tooth_no"></has-error>
                         </div>
                         <div class="form-group">
-                        <textarea class="form-control" id="inputExperience" placeholder="Treatment"></textarea>
+                        <textarea class="form-control" v-model="form.procedure" name="procedure" placeholder="Prescription"></textarea>
                         </div>
                         <div class="form-group">
-                            <input v-model="form.lastname" type="text" name="lastname"
+                            <input v-model="form.status" type="text" name="status"
                             placeholder="Status" 
-                            class="form-control ucfirst" :class="{ 'is-invalid': form.errors.has('lastname') }">
-                            <has-error :form="form" field="lastname"></has-error>
+                            class="form-control ucfirst" :class="{ 'is-invalid': form.errors.has('status') }">
+                            <has-error :form="form" field="status"></has-error>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                 <span class="input-group-text">₱</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Amount Charge">
+                                <input type="text" v-model="form.amount_charge" name="amount_charge" class="form-control" placeholder="Amount Charge"  :class="{ 'is-invalid': form.errors.has('amount_charge') }">
                                 <div class="input-group-append">
                                 <span class="input-group-text">.00</span>
                                 </div>
+                                <has-error :form="form" field="amount_charge"></has-error>
                             </div>
                         </div>
                         <div class="form-group">
-                        <textarea class="form-control" id="inputExperience" placeholder="Notes"></textarea>
+                        <textarea class="form-control" v-model="form.notes" name="notes" placeholder="Notes"></textarea>
                         </div>                        
                         <div class="form-group">
                         &nbsp;
@@ -120,6 +129,60 @@
                 </div>
             </div>
         </div>
+        <!-- End of Modal -->
+
+        <!-- Paid Modal -->
+        <div class="modal fade" id="treatmentModal1" tabindex="-1" role="dialog" aria-labelledby="treatmentModal1Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="treatmentModal1Label">Treatment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="updateTreatment1()">
+                    <div class="modal-body col-md-8">
+                        <label>Patient</label>
+                        <div class="form-group">
+                            <input v-model="form.patient" type="text" name="patient"
+                            placeholder="Patient" 
+                            class="form-control" disabled>
+                        </div>
+                        <label>Amount Charge</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                                </div>
+                                <input type="text" v-model="form.amount_charge" name="amount_charge" class="form-control" placeholder="Amount Charge"  :class="{ 'is-invalid': form.errors.has('amount_charge') }" disabled>
+                                <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                                </div>
+                                <has-error :form="form" field="amount_charge"></has-error>
+                            </div>
+                        </div>
+                        <label>Status</label>
+                        <div class="form-group">
+                            <select name="amount_paid" v-model="form.amount_paid" id="amount_paid" class="form-control" :class="{ 'is-invalid': form.errors.has('amount_paid') }">
+                                <option value="PAID">PAID</option>
+                                <option value="UNPAID">UNPAID</option>
+                            </select>
+                            <has-error :form="form" field="amount_paid"></has-error>
+                        </div>                  
+                        <div class="form-group">
+                        &nbsp;
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success btn-flat">Save</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal Paid -->
 
     </div>
 </template>
@@ -130,6 +193,7 @@ export default {
         return {
             treatments: {},
             form: new Form({
+                id: '',
                 patient: '',
                 tooth_no: '',
                 procedure: '',
@@ -142,32 +206,63 @@ export default {
         }
     },
     methods: {
-        treatmentX()
+        updateTreatment()
+        {
+            this.$Progress.start();
+            this.form.put('treatment/'+this.form.id)
+            .then(() => {
+            $('#treatmentModal').modal('hide');
+            swal.fire(
+                'Updated!',
+                'Patient information updated.',
+                'success'
+                )
+                Fire.$emit('afterCreate');
+                this.$Progress.finish();
+            Fire.$emit('afterCreate');
+            })
+            .catch(() => {
+                this.$Progress.fail();
+            })
+        },        
+        updateTreatment1()
+        {
+            this.$Progress.start();
+            this.form.put('treatment/'+this.form.id)
+            .then(() => {
+            $('#treatmentModal1').modal('hide');
+            swal.fire(
+                'Updated!',
+                'Patient information updated.',
+                'success'
+                )
+                Fire.$emit('afterCreate');
+                this.$Progress.finish();
+            Fire.$emit('afterCreate');
+            })
+            .catch(() => {
+                this.$Progress.fail();
+            })
+        },
+        editTreatment(treatment)
         {
             this.form.reset();
             $('#treatmentModal').modal('show');
+            this.form.fill(treatment);
+
+        },
+        editTreatment1(treatment)
+        {
+            this.form.reset();
+            $('#treatmentModal1').modal('show');
+            this.form.fill(treatment);
+
         },
         loadTreatment()
         {
             axios.get('treatment').then(({ data }) => (this.treatments = data.data));
         },
-        createPatient() 
-        {
-            this.$Progress.start();
-            this.form.post('api/patient')
-            .then(()=>{ 
-            Fire.$emit('afterCreate');
-            $('#addNew').modal('hide');
-            toast.fire({
-                type: 'success',
-                title: 'Patient added successfully.'
-                })
-                this.$Progress.finish()
-            })
-            .catch(()=>{
-                this.$Progress.fail()
-            })
-        }
+        
     },
     created(){
         this.loadTreatment();

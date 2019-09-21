@@ -53,6 +53,7 @@
 <div class="col-4">
     <button type="submit" class="btn btn-primary btn-block btn-flat">
         {{ __('Login') }}
+        <i class="fas fa-arrow-alt-circle-right"></i>
     </button>
 </div>
 <!-- /.col -->

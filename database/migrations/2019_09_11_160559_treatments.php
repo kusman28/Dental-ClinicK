@@ -22,7 +22,7 @@ class Treatments extends Migration
             $table->string('amount_paid')->nullable();
             $table->string('balance')->nullable();
             $table->string('type');
-            $table->string('status')->default('On-going');
+            $table->string('status');
             $table->timestamps();
         });
     }

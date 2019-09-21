@@ -30,7 +30,8 @@
 									<td>{{patient.age}}</td>
 									<td>{{patient.address}}</td>
 									<td>{{patient.contact_no}}</td>
-									<td><span :class="[patient.type === 'Denture' ? 'badge-success' : (patient.type === 'Brace'?'badge-warning':'badge-primary'), 'badge badge-pill']">{{patient.type | upCase}}</span></td>
+									<td><span :class="[patient.type === 'Denture' ? 'badge-success' : (patient.type === 'Brace'?'badge-warning':'badge-primary'), 'badge badge-pill']">{{patient.type | upCase}}</span>
+									</td>
 			                      <td>
 			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(patient)">
 			                      		<i class="fas fa-edit"></i>

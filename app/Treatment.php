@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Treatment extends Model
 {
     protected $fillable = [
-    	'patient',
-    	'procedure',
-    	'amount_charge',
-    	'amount_paid',
-    	'balance',
+        'patient',
+    	'tooth_no',
+        'procedure',
+    	'status',
+        'amount_charge',
+        'amount_paid',
     	'type'
     ];
 
