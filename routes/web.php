@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('treatment', 'TreatmentController@index');
 Route::get('treatment/denture', 'TreatmentController@denture');
 Route::get('treatment/extraction', 'TreatmentController@extraction');
+Route::get('treatment/allpatient', 'TreatmentController@allPatient');
 // Route::put('treatment/update', 'TreatmentController@update');
 
 

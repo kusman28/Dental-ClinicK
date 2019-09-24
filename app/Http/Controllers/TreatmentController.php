@@ -28,6 +28,11 @@ class TreatmentController extends Controller
         return Treatment::latest('patient')->where('type', '=', 'Extraction')->paginate(5);
     }
 
+    public function allPatient()
+    {
+       return Treatment::latest()->paginate(10);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

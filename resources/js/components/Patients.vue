@@ -26,7 +26,7 @@
 							<tbody>
 								<tr v-for="patient in patients" :key="patient.id">
 									<td>{{patient.id}}</td>
-									<td>{{patient.firstname}} {{patient.middlename}} {{patient.lastname}}</td>
+									<td>{{patient.firstname | upCase}} {{patient.middlename | upCase}} {{patient.lastname |upCase}}</td>
 									<td>{{patient.age}}</td>
 									<td>{{patient.address}}</td>
 									<td>{{patient.contact_no}}</td>

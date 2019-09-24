@@ -81,15 +81,9 @@
                         </div>
                         <div class="form-group">
                             <select name="tooth_no" v-model="form.tooth_no" id="tooth_no" class="form-control" :class="{ 'is-invalid': form.errors.has('tooth_no') }">
-                                <option value="">Tooth No.</option>
-                                <option value="1-1 Incisors">1-1 Incisors</option>
-                                <option value="1-2 Incisors">1-2 Incisors</option>
-                                <option value="1-3 Canine">1-3 Canine</option>
-                                <option value="1-4 Premolar">1-4 Premolar</option>
-                                <option value="1-5 Premolar">1-5 Premolar</option>
-                                <option value="1-6 Molar">1-6 Molar</option>
-                                <option value="1-7 Molar">1-7 Molar</option>
-                                <option value="1-8 Molar">1-8 Molar</option>
+                                <option value="">Tooth Part</option>
+                                <option value="Upper">Upper</option>
+                                <option value="Lower">Lower</option>
                             </select>
                             <has-error :form="form" field="tooth_no"></has-error>
                         </div>

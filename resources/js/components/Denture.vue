@@ -34,7 +34,7 @@
                                     <td>{{treatment.amount_charge}}</td>
                                     <td>{{treatment.amount_paid}}</td>
                                     <td>{{treatment.balance}}</td>
-                                    <td><span :class="[treatment.status === 'On-going' ? 'badge-warning' : (treatment.status === 'Done'?'badge-success':'badge-primary'), 'badge badge-pill']">{{treatment.status | upCase}} 
+                                    <td><span :class="[treatment.status === 'On-going' ? 'badge-warning' : (treatment.status === 'Done'?'badge-success':'badge-primary'), 'badge badge-pill']">{{treatment.status}} 
                                         <i :class="[treatment.status === 'On-going' ? 'fas fa-clock' : (treatment.status === 'Done'?'fas fa-check':'badge-primary')]"></i></span></td>
                                   <td>
                                     <a href="#" class="btn btn-primary btn-sm" @click="editModal(user)">

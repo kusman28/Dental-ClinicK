@@ -26,6 +26,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.10.2",
         "admin-lte": "^3.0.0-alpha.2",
+        "moment": "^2.24.0",
         "os-vue": "^1.1.1",
         "overlayscrollbars-vue": "^0.1.0",
         "sweetalert2": "^8.17.1",
