@@ -2074,6 +2074,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2834,7 +2835,7 @@ __webpack_require__.r(__webpack_exports__);
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes'
       }).then(function (result) {
         if (result.value) {
           _this2.form["delete"]('api/patient/' + id).then(function () {
@@ -3113,7 +3114,7 @@ __webpack_require__.r(__webpack_exports__);
     loadTreatment: function loadTreatment() {
       var _this2 = this;
 
-      axios.get('treatment/allpatient').then(function (_ref) {
+      axios.get('pdf').then(function (_ref) {
         var data = _ref.data;
         return _this2.treatments = data.data;
       });
@@ -66695,33 +66696,28 @@ var render = function() {
                         "a",
                         {
                           staticClass: "btn btn-primary btn-sm",
-                          attrs: { href: "#" },
+                          attrs: { href: "#", title: "Treatment" },
                           on: {
                             click: function($event) {
                               return _vm.editTreatment(treatment)
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "Treatment \n                                    "
-                          ),
-                          _c("i", { staticClass: "fas fa-file-prescription" })
-                        ]
+                        [_c("i", { staticClass: "fas fa-file-prescription" })]
                       ),
                       _vm._v(" "),
                       _c(
                         "a",
                         {
                           staticClass: "btn btn-success btn-sm",
-                          attrs: { href: "#" },
+                          attrs: { href: "#", title: "Payment" },
                           on: {
                             click: function($event) {
                               return _vm.editTreatment1(treatment)
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fas fa-check" })]
+                        [_c("i", { staticClass: "fas fa-money-bill-alt" })]
                       )
                     ])
                   ])
@@ -67403,25 +67399,36 @@ var render = function() {
             _c("div", { staticClass: "info-box" }, [
               _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "info-box-content" }, [
-                _c("span", { staticClass: "info-box-text" }, [
-                  _vm._v("Patient")
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "info-box-number" }, [
-                  _vm._v(
-                    "\n                            \n                          " +
-                      _vm._s(_vm.patients.length) +
-                      "\n                          "
+              _c(
+                "div",
+                { staticClass: "info-box-content" },
+                [
+                  _c("span", { staticClass: "info-box-text" }, [
+                    _vm._v("Patient")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "info-box-number" }, [
+                    _vm._v(
+                      "\n                            \n                          " +
+                        _vm._s(_vm.patients.length) +
+                        "\n                          "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: "/patients" }
+                    },
+                    [
+                      _vm._v("More info\n                        "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "small-box-footer", attrs: { href: "#" } },
-                  [_vm._v("\n                       \n                      ")]
-                )
-              ])
+                ],
+                1
+              )
             ])
           ]),
           _vm._v(" "),
@@ -69618,9 +69625,9 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(patient.age))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(patient.address))]),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm._f("myDate")(patient.created_at)))
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(patient.contact_no))]),
                     _vm._v(" "),
@@ -70137,9 +70144,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Age")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Address")]),
+        _c("th", [_vm._v("Date of Appointment")]),
         _vm._v(" "),
         _c("th", [_vm._v("Contact")]),
         _vm._v(" "),
@@ -70233,12 +70238,7 @@ var render = function() {
                         "a",
                         {
                           staticClass: "btn btn-success btn-sm",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.editTreatment1(treatment)
-                            }
-                          }
+                          attrs: { href: "/pdfexport/" + treatment.id }
                         },
                         [
                           _vm._v("Print\n                                    "),
@@ -86704,8 +86704,8 @@ component.options.__file = "resources/js/components/Profile.vue"
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\riali\Desktop\DentalClinic\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\riali\Desktop\DentalClinic\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\riali\desktop\DentalClinic\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\riali\desktop\DentalClinic\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -12,7 +12,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Dental ClinicK | Dashboard</title>
-  <link rel="stylesheet" type="text/css" href="/css/app.css">
+  <link rel="stylesheet" type="text/css" href="/css/app.css"><link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <style>
+  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+  .toggle.ios .toggle-handle { border-radius: 20px; }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -44,6 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
@@ -53,6 +58,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </form>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      <div class="checkbox">
+        <label>Status:</label>
+        <input type="checkbox" checked data-toggle="toggle" data-size="small" data-on="Available" data-off="Unvailable" data-style="ios" data-onstyle="success" data-offstyle="danger">
+      </div>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -91,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt app"></i>
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
@@ -99,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <router-link to="/patients" class="nav-link">
-              <i class="nav-icon fas fa-users app"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Patients
               </p>
@@ -107,9 +116,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users-cog app"></i>
+              <i class="nav-icon fas fa-users-cog"></i>
               <p>
-                Management
+                Manage
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -135,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
             <li class="nav-item">
               <a href="/prescription" class="nav-link">
-                <i class="nav-icon fas fa-file-prescription app"></i>
+                <i class="nav-icon fas fa-file-prescription"></i>
                 <p>
                   Treatment
                 </p>
@@ -143,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             <li class="nav-item">
               <a href="/payment" class="nav-link">
-                <i class="nav-icon fas fa-money-bill-alt app"></i>
+                <i class="nav-icon fas fa-money-bill-alt"></i>
                 <p>
                   Payment
                 </p>
@@ -151,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-print app"></i>
+                <i class="nav-icon fas fa-print"></i>
                 <p>
                   Report
                 </p>
@@ -159,15 +168,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-download app"></i>
+                <i class="nav-icon fas fa-user-nurse"></i>
                 <p>
-                  Data Backup
+                  Users
                 </p>
               </a>
             </li>
             <li class="nav-item">
               <router-link to="/profile" class="nav-link">
-                <i class="nav-icon fas fa-user app"></i>
+                <i class="nav-icon fas fa-user-md"></i>
                 <p>
                   Profile
                 </p>
@@ -212,12 +221,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div> -->
     <!-- Default to the left -->
-    <strong>Dental Management System &copy; 2019 <a href="https://www.facebook.com/Pinaka.Mahabang.UserName.Sa.Peysbuk">K. Usman</a>.</strong> All rights reserved.
+    <strong>Dental ClinicK Management System &copy; 2019 <a href="https://www.facebook.com/Pinaka.Mahabang.UserName.Sa.Peysbuk">K. Usman</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 <script src="/js/app.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </body>
 </html>

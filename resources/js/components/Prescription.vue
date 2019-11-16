@@ -40,7 +40,7 @@
                                     <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">
                                         <i class="fas fa-file-prescription"></i>
                                     </a>
-                                    <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)">Print
+                                    <a :href="'/pdfexport/' + treatment.id" class="btn btn-success btn-sm">Print
                                         <i class="fas fa-print"></i>
                                     </a>
                                   </td>
@@ -224,7 +224,7 @@ export default {
         },
         loadTreatment()
         {
-            axios.get('treatment/allpatient').then(({ data }) => (this.treatments = data.data));
+            axios.get('pdf').then(({ data }) => (this.treatments = data.data));
         },
         
     },

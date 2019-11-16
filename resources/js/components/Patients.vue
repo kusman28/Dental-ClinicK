@@ -16,8 +16,8 @@
 								<tr>
 									<th>ID</th>
 									<th>Name</th>
-									<th>Age</th>
-									<th>Address</th>
+									<th>Date of Appointment</th>
+									<!-- <th>Address</th> -->
 									<th>Contact</th>
 									<th>Patient Type</th>
 									<th>Action</th>
@@ -27,8 +27,8 @@
 								<tr v-for="patient in patients" :key="patient.id">
 									<td>{{patient.id}}</td>
 									<td>{{patient.firstname | upCase}} {{patient.middlename | upCase}} {{patient.lastname |upCase}}</td>
-									<td>{{patient.age}}</td>
-									<td>{{patient.address}}</td>
+									<td>{{patient.created_at | myDate}}</td>
+									<!-- <td>{{patient.address}}</td> -->
 									<td>{{patient.contact_no}}</td>
 									<td><span :class="[patient.type === 'Denture' ? 'badge-success' : (patient.type === 'Brace'?'badge-warning':'badge-primary'), 'badge badge-pill']">{{patient.type | upCase}}</span>
 									</td>
@@ -185,7 +185,7 @@ export default {
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, delete it!'
+			confirmButtonText: 'Yes'
 			}).then((result) => {
 
 			if (result.value) {	

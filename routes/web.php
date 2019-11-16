@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome2');
 });
 
 Auth::routes();
@@ -25,6 +25,9 @@ Route::get('treatment/allpatient', 'TreatmentController@allPatient');
 
 
 Route::resources(['treatment' => 'TreatmentController']); 
+
+Route::resources(['pdf' => 'PDFController']); 
+Route::get('pdfexport/{id}', 'PDFController@pdfexport');
 
 // Route::resources(['treatment' => 'DentureController']);
 // Route::resources(['brace' => 'BraceController']);

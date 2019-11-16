@@ -42,11 +42,11 @@
                                         <i :class="[treatment.status === 'On-going' ? 'fas fa-clock' : (treatment.status === 'Done'?'fas fa-check':'badge-primary')]"></i></span></td>
                                     -->
                                   <td>
-                                    <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">Treatment 
+                                    <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)" title="Treatment"> 
                                         <i class="fas fa-file-prescription"></i>
                                     </a>
-                                    <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)">
-                                        <i class="fas fa-check"></i>
+                                    <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)" title="Payment">
+                                        <i class="fas fa-money-bill-alt"></i>
                                     </a>
                                   </td>
                                 </tr>

@@ -14,9 +14,10 @@
                           {{patients.length}}
                           <!-- <small>%</small> -->
                       </span>
-                      <a href="#" class="small-box-footer">
-                      &nbsp;
-                      </a>
+                            
+                    <router-link to="/patients" class="small-box-footer">More info
+                        <i class="fas fa-arrow-circle-right"></i>
+                      </router-link>
                   </div>
                   <!-- /.info-box-content -->
               </div>
