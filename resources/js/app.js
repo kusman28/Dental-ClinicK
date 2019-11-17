@@ -28,6 +28,9 @@ let routes = [
   { path: '/denture', component: require('./components/Denture').default },
   { path: '/extraction', component: require('./components/Extraction').default },
   { path: '/prescription', component: require('./components/Prescription').default },
+  { path: '/payment', component: require('./components/Payment').default },
+  { path: '/report', component: require('./components/Report').default },
+  { path: '/users', component: require('./components/Users').default },
   { path: '/profile', component: require('./components/Profile').default},
   { path: '*', component: require('./components/NotFound').default}
 ]

@@ -58,10 +58,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </form>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <div class="checkbox">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" checked id="customSwitch1">
+        <label class="custom-control-label" for="customSwitch1">Status</label>
+      </div>
+      {{-- <div class="checkbox">
         <label>Status:</label>
         <input type="checkbox" checked data-toggle="toggle" data-size="small" data-on="Available" data-off="Unvailable" data-style="ios" data-onstyle="success" data-offstyle="danger">
-      </div>
+      </div> --}}
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -79,14 +83,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/img/dentist.png" class="img-circle elevation-2" alt="User Image">
+        <div class="image" style="margin-top: 10px;">
+          <img src="/img/dentist.png" class="img-circle elevation-1" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            Dr.
-            {{ Auth::user()->name }}
-            <!-- <p>{{ Auth::user()->type }}</p> -->
+            {{ Auth::user()->name }}<br>
+            <span class="badge badge-success">{{ Auth::user()->type }}</span>
           </a>
         </div>
       </div>
@@ -130,49 +133,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
               <li class="nav-item">
-                <a href="/extraction" class="nav-link">
+                <router-link to="/extraction" class="nav-link">
                   <i class="fas fa-tooth nav-icon blue"></i>
                   <p>Extractions</p>
-                </a>
+                </router-link>
               </li>
               <li class="nav-item">
-                <a href="/denture" class="nav-link">
+                <router-link to="/denture" class="nav-link">
                   <i class="fas fa-teeth-open nav-icon green"></i>
                   <p>Dentures</p>
-                </a>
+                </router-link>
               </li>
             </ul>
             <li class="nav-item">
-              <a href="/prescription" class="nav-link">
+              <router-link to="/prescription" class="nav-link">
                 <i class="nav-icon fas fa-file-prescription"></i>
                 <p>
                   Treatment
                 </p>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
-              <a href="/payment" class="nav-link">
+              <router-link to="/payment" class="nav-link">
                 <i class="nav-icon fas fa-money-bill-alt"></i>
                 <p>
                   Payment
                 </p>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <router-link to="/report" class="nav-link">
                 <i class="nav-icon fas fa-print"></i>
                 <p>
                   Report
                 </p>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <router-link to="users" class="nav-link">
                 <i class="nav-icon fas fa-user-nurse"></i>
                 <p>
                   Users
                 </p>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/profile" class="nav-link">

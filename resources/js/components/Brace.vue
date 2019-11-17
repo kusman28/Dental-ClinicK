@@ -14,13 +14,13 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Patient ID</th>
                                     <th>Patient</th>
-                                    <th>Tooth No.</th>
+                                    <th>Tooth Part</th>
                                     <!-- <th>Prescription</th> -->
                                     <th>Status</th>
                                     <th>Amount Charge</th>
-                                    <th>Status</th>
+                                    <th>Payment</th>
                                     <!-- <th>Balance</th>
                                     <th>Status</th> -->
                                     <th>Action</th>

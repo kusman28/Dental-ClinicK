@@ -14,7 +14,7 @@ class TreatmentController extends Controller
      */
     public function index()
     {
-        return Treatment::latest('patient')->where('type', '=', 'Brace')->paginate(20);
+        return Treatment::latest('patient')->where('type', '=', 'Brace')->paginate(15);
         // return Treatment::latest()->paginate(5);
     }
 
@@ -25,7 +25,7 @@ class TreatmentController extends Controller
 
     public function extraction()
     {
-        return Treatment::latest('patient')->where('type', '=', 'Extraction')->paginate(5);
+        return Treatment::latest('patient')->where('type', '=', 'Extraction')->paginate(15);
     }
 
     public function allPatient()

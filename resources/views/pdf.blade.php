@@ -56,7 +56,7 @@
 						</tbody>
 					</table>
 					<div class="footer-wrapper">
-						<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+						<p class="">Keep this document as a copy of your record.</p>
 					</div>
 				</div>
 			</div>

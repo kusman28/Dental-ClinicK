@@ -14,7 +14,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Patient ID</th>
                                     <th>Patient</th>
                                     <th>Tooth No.</th>
                                     <th>Prescription</th>
