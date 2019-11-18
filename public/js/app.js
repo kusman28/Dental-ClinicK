@@ -3274,6 +3274,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3293,7 +3297,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      this.form.put('api/patient/' + this.form.id).then(function () {
+      this.form.put('api/user/' + this.form.id).then(function () {
         $('#addNew').modal('hide');
         swal.fire('Updated!', 'Patient information updated.', 'success');
         Fire.$emit('afterCreate');
@@ -3305,11 +3309,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.$Progress.fail();
       });
     },
-    editModal: function editModal(patient) {
+    editModal: function editModal(user) {
       this.editmode = true;
       this.form.reset();
       $('#addNew').modal('show');
-      this.form.fill(patient);
+      this.form.fill(user);
     },
     newModal: function newModal() {
       this.editmode = false;
@@ -3329,7 +3333,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes'
       }).then(function (result) {
         if (result.value) {
-          _this2.form["delete"]('api/patient/' + id).then(function () {
+          _this2.form["delete"]('api/user/' + id).then(function () {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('afterCreate');
           })["catch"](function () {
@@ -71207,9 +71211,22 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.email))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.type))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.password))]),
+                    _c("td", [
+                      _c(
+                        "span",
+                        {
+                          class: [
+                            user.type === "Admin"
+                              ? "badge-success"
+                              : user.type === "Assisstant"
+                              ? "badge-primary"
+                              : "badge-primary",
+                            "badge badge-pill"
+                          ]
+                        },
+                        [_vm._v(_vm._s(user.type))]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [
                       _c(
@@ -71446,6 +71463,50 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.password_confirmation,
+                              expression: "form.password_confirmation"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("password")
+                          },
+                          attrs: {
+                            type: "password",
+                            name: "password_confirmation",
+                            placeholder: "Re-enter password"
+                          },
+                          domProps: { value: _vm.form.password_confirmation },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "password_confirmation",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "password" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
                         _c(
                           "select",
                           {
@@ -71576,8 +71637,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
         _c("th", [_vm._v("Type")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Password")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])

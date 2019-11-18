@@ -19,7 +19,6 @@
 									<th>Email</th>
 									<!-- <th>Address</th> -->
 									<th>Type</th>
-									<th>Password</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -29,8 +28,7 @@
 									<td>{{user.name | upCase}}</td>
 									<td>{{user.email}}</td>
 									<!-- <td>{{patient.address}}</td> -->
-									<td>{{user.type}}</td>
-									<td>{{user.password}}</td>
+									<td><span :class="[user.type === 'Admin' ? 'badge-success' : (user.type === 'Assisstant'?'badge-primary':'badge-primary'), 'badge badge-pill']">{{user.type}}</span></td>
 			                      <td>
 			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(user)">
 			                      		<i class="fas fa-edit"></i>
@@ -83,6 +81,12 @@
         					<has-error :form="form" field="password"></has-error>
         				</div>
         				<div class="form-group">
+        					<input v-model="form.password_confirmation" type="password" name="password_confirmation"
+        					placeholder="Re-enter password" 
+        					class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+        					<has-error :form="form" field="password"></has-error>
+        				</div>
+        				<div class="form-group">
         					<select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
         						<option value="">User Role</option>
         						<option value="Admin">Admin</option>
@@ -124,7 +128,7 @@ export default {
 		updateUser()
 		{
 			this.$Progress.start();
-			this.form.put('api/patient/'+this.form.id)
+			this.form.put('api/user/'+this.form.id)
 			.then(() => {
 			$('#addNew').modal('hide');
 			swal.fire(
@@ -140,12 +144,12 @@ export default {
 				this.$Progress.fail();
 			})
 		},
-		editModal(patient)
+		editModal(user)
 		{
 			this.editmode = true;
 			this.form.reset();
 			$('#addNew').modal('show');
-			this.form.fill(patient);
+			this.form.fill(user);
 		},
 		newModal()
 		{
@@ -166,7 +170,7 @@ export default {
 			}).then((result) => {
 
 			if (result.value) {	
-				this.form.delete('api/patient/'+id).then(()=>{
+				this.form.delete('api/user/'+id).then(()=>{
 						swal.fire(
 						'Deleted!',
 						'Your file has been deleted.',

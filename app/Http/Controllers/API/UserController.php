@@ -31,7 +31,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:15',
             'email' => 'required|string|email|max:50|unique:users',
-            'password' => 'required|string|max:8',
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
         return User::create([
@@ -65,7 +65,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $this->validate($request,[
+            'name' => 'required|string|max:25',
+            'email' => 'required|string|email|max:30|unique:users,email,'.$user->id,
+            'password' => 'sometimes|min:8'
+        ]);
+
+        $user->update($request->all());
+        return ['message' => 'Updated!'];
     }
 
     /**
@@ -76,6 +85,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $this->authorizeResource('isAdmin');
+
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return ['message' => 'User deleted.'];
     }
 }
