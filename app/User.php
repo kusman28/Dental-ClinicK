@@ -6,9 +6,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Traits\CausesActivity;
+
+use Illuminate\Database\Eloquent\Model;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, LogsActivity, CausesActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +23,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'type', 'photo',
     ];
+
+    protected static $logFillable = true;
 
     /**
      * The attributes that should be hidden for arrays.

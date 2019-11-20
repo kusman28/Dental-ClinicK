@@ -32,6 +32,7 @@ let routes = [
   { path: '/report', component: require('./components/Report').default },
   { path: '/users', component: require('./components/Users').default },
   { path: '/profile', component: require('./components/Profile').default},
+  { path: '/admin/activities', component: require('./components/Activities').default},
   { path: '*', component: require('./components/NotFound').default}
 ]
 const router = new VueRouter({
