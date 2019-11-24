@@ -1705,6 +1705,87 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Activities.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Activities.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      activities: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/activities').then(function (response) {
+      _this.activities = response.data;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Brace.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Brace.vue?vue&type=script&lang=js& ***!
@@ -66898,120 +66979,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("h3", { staticClass: "card-title mt-4" }, [_vm._v("Activities")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        _vm._l(_vm.activities, function(activity, i) {
+          return _c("ul", { key: i, staticClass: "timeline" }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("li", { staticClass: "time-label" }, [
+              _c("span", { staticClass: "bg-success" }, [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm._f("myDate")(activity.created_at)) +
+                    "\n        "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("div", { staticClass: "timeline-item" }, [
+                _c("span", { staticClass: "time" }, [
+                  _c("i", { staticClass: "fa fa-clock-o" }),
+                  _vm._v(" " + _vm._s(_vm._f("myTime")(activity.created_at)))
+                ]),
+                _vm._v(" "),
+                _c("h3", { staticClass: "timeline-header" }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(activity.causer.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "timeline-body" }, [
+                  _c("b", [
+                    _vm._v(_vm._s(_vm._f("upCase")(activity.description)))
+                  ]),
+                  _vm._v(" " + _vm._s(activity.properties.attributes.type)),
+                  _c("br"),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(activity.properties.attributes.name) +
+                      " name\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "timeline-footer" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _vm._m(0, true)
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "contaimer" }, [
-      _c("h3", [_vm._v("Activities")]),
-      _vm._v(" "),
-      _c("section", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "timeline" }, [
-                _c("div", { staticClass: "time-label" }, [
-                  _c("span", { staticClass: "bg-red" }, [
-                    _vm._v("10 Feb. 2014")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("i", { staticClass: "fas fa-envelope bg-blue" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "timeline-item" }, [
-                    _c("span", { staticClass: "time" }, [
-                      _c("i", { staticClass: "fas fa-clock" }),
-                      _vm._v(" 12:05")
-                    ]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "timeline-header" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Support Team")
-                      ]),
-                      _vm._v(" sent you an email")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "timeline-body" }, [
-                      _vm._v(
-                        "\n                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,\n                    weebly ning heekya handango imeem plugg dopplr jibjab, movity\n                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle\n                    quora plaxo ideeli hulu weebly balihoo...\n                  "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "timeline-footer" }, [
-                      _c("a", { staticClass: "btn btn-primary btn-sm" }, [
-                        _vm._v("Read more")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "btn btn-danger btn-sm" }, [
-                        _vm._v("Delete")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("i", { staticClass: "fas fa-user bg-green" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "timeline-item" }, [
-                    _c("span", { staticClass: "time" }, [
-                      _c("i", { staticClass: "fas fa-clock" }),
-                      _vm._v(" 5 mins ago")
-                    ]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "timeline-header no-border" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Sarah Young")
-                      ]),
-                      _vm._v(" accepted your friend request")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("i", { staticClass: "fas fa-comments bg-yellow" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "timeline-item" }, [
-                    _c("span", { staticClass: "time" }, [
-                      _c("i", { staticClass: "fas fa-clock" }),
-                      _vm._v(" 27 mins ago")
-                    ]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "timeline-header" }, [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Jay White")]),
-                      _vm._v(" commented on your post")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "timeline-body" }, [
-                      _vm._v(
-                        "\n                    Take me to your leader!\n                    Switzerland is small and neutral!\n                    We are more like Germany, ambitious and misunderstood!\n                  "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "timeline-footer" }, [
-                      _c("a", { staticClass: "btn btn-warning btn-sm" }, [
-                        _vm._v("View comment")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "time-label" }, [
-                  _c("span", { staticClass: "bg-green" }, [
-                    _vm._v("3 Jan. 2014")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [_c("i", { staticClass: "fas fa-clock bg-gray" })])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c("li", [_c("i", { staticClass: "fa fa-clock bg-info" })])
   }
 ]
 render._withStripped = true
@@ -86914,7 +86948,7 @@ var routes = [{
   path: '/profile',
   component: __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue")["default"]
 }, {
-  path: '/admin/activities',
+  path: '/activities',
   component: __webpack_require__(/*! ./components/Activities */ "./resources/js/components/Activities.vue")["default"]
 }, {
   path: '*',
@@ -86952,6 +86986,9 @@ Vue.filter('upCase', function (text) {
 });
 Vue.filter('myDate', function (created) {
   return moment__WEBPACK_IMPORTED_MODULE_1___default()(created).format('MMMM Do YYYY');
+});
+Vue.filter('myTime', function (created) {
+  return moment__WEBPACK_IMPORTED_MODULE_1___default()(created).format('hh:mm a');
 });
 /**
  * The following block of code may be used to automatically register your
@@ -87056,15 +87093,17 @@ if (token) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Activities_vue_vue_type_template_id_6649abd0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Activities.vue?vue&type=template&id=6649abd0& */ "./resources/js/components/Activities.vue?vue&type=template&id=6649abd0&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Activities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Activities.vue?vue&type=script&lang=js& */ "./resources/js/components/Activities.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Activities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Activities_vue_vue_type_template_id_6649abd0___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Activities_vue_vue_type_template_id_6649abd0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -87078,6 +87117,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/Activities.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Activities.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Activities.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Activities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Activities.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Activities.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Activities_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

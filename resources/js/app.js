@@ -32,7 +32,7 @@ let routes = [
   { path: '/report', component: require('./components/Report').default },
   { path: '/users', component: require('./components/Users').default },
   { path: '/profile', component: require('./components/Profile').default},
-  { path: '/admin/activities', component: require('./components/Activities').default},
+  { path: '/activities', component: require('./components/Activities').default},
   { path: '*', component: require('./components/NotFound').default}
 ]
 const router = new VueRouter({
@@ -73,6 +73,9 @@ Vue.filter('upCase', function(text){
 });
 Vue.filter('myDate', function(created){
   return moment(created).format('MMMM Do YYYY');
+})
+Vue.filter('myTime', function(created){
+  return moment(created).format('hh:mm a');
 })
 /**
  * The following block of code may be used to automatically register your
