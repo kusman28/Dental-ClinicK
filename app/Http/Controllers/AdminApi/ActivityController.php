@@ -12,7 +12,9 @@ class ActivityController extends Controller
 {
     public function index()
     {
-    	$activities = auth()->user()->actions->load('causer');
+
+        $activities = auth()->user()->actions->load('causer');
+        
 
     	// return Activity::latest()->paginate(10);
     	return $activities;

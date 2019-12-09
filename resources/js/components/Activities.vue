@@ -29,8 +29,8 @@
             <h3 class="timeline-header"><a href="#">{{activity.causer.name}}</a></h3>
 
             <div class="timeline-body">
-                <b>{{activity.description | upCase}}</b> {{activity.properties.attributes.type}}<br>
-                {{activity.properties.attributes.name}} name
+                {{activity.description | upCase}}<b> {{activity.properties.attributes.type}}</b><br>
+                {{activity.properties.attributes.name}} {{activity.properties.attributes.fullname}}
             </div>
 
             <div class="timeline-footer">
@@ -44,7 +44,7 @@
     <li>
     	<i class="fa fa-clock bg-info"></i>
     </li>
-    
+
 </ul>
           </div>
           <!-- /.col -->
@@ -56,7 +56,7 @@
 <script>
 	export default {
 		data: ()=> ({
-			activities: []
+			activities: [],
 		}),
 		created(){
 			axios.get('/api/activities').then(response => {

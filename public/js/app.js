@@ -67014,15 +67014,20 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "timeline-body" }, [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm._f("upCase")(activity.description))
+                  ),
                   _c("b", [
-                    _vm._v(_vm._s(_vm._f("upCase")(activity.description)))
+                    _vm._v(" " + _vm._s(activity.properties.attributes.type))
                   ]),
-                  _vm._v(" " + _vm._s(activity.properties.attributes.type)),
                   _c("br"),
                   _vm._v(
                     "\n                " +
                       _vm._s(activity.properties.attributes.name) +
-                      " name\n            "
+                      " " +
+                      _vm._s(activity.properties.attributes.fullname) +
+                      "\n            "
                   )
                 ]),
                 _vm._v(" "),
@@ -87887,8 +87892,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\riali\desktop\DentalClinic\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\riali\desktop\DentalClinic\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\riali\Desktop\DentalClinic\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\riali\Desktop\DentalClinic\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
