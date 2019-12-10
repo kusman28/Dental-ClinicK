@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <router-link to="/payment" class="nav-link">
                 <i class="nav-icon fas fa-money-bill-alt"></i>
                 <p>
-                  Payment
+                  Medical History
                 </p>
               </router-link>
             </li>

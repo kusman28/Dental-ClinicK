@@ -81,7 +81,7 @@
         					<has-error :form="form" field="password"></has-error>
         				</div>
         				<div class="form-group">
-        					<input v-model="form.password_confirmation" type="password" name="password_confirmation"
+        					<input v-show="!editmode" v-model="form.password_confirmation" type="password" name="password_confirmation"
         					placeholder="Re-enter password" 
         					class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
         					<has-error :form="form" field="password"></has-error>
