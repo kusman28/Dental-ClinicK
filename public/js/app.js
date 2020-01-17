@@ -68928,7 +68928,12 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fas fa-file-prescription" })]
+                        [
+                          _vm._v(
+                            "Treatment \n                                    "
+                          ),
+                          _c("i", { staticClass: "fas fa-heartbeat" })
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -68942,7 +68947,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fas fa-money-bill-alt" })]
+                        [_c("i", { staticClass: "fas fa-check" })]
                       )
                     ])
                   ])
@@ -69669,8 +69674,8 @@ var render = function() {
                       attrs: { to: "/brace" }
                     },
                     [
-                      _vm._v("More info\n                  "),
-                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                      _vm._v("View Details\n                  "),
+                      _c("i", { staticClass: "fas fa-arrow-right" })
                     ]
                   )
                 ],
@@ -69708,8 +69713,8 @@ var render = function() {
                       attrs: { to: "/extraction" }
                     },
                     [
-                      _vm._v("More info\n                  "),
-                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                      _vm._v("View Details\n                  "),
+                      _c("i", { staticClass: "fas fa-arrow-right" })
                     ]
                   )
                 ],
@@ -69741,8 +69746,8 @@ var render = function() {
                       attrs: { to: "/denture" }
                     },
                     [
-                      _vm._v("More info\n              "),
-                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                      _vm._v("View Details\n                  "),
+                      _c("i", { staticClass: "fas fa-arrow-right" })
                     ]
                   )
                 ],
@@ -70484,7 +70489,7 @@ var render = function() {
                           _vm._v(
                             "Treatment \n                                    "
                           ),
-                          _c("i", { staticClass: "fas fa-file-prescription" })
+                          _c("i", { staticClass: "fas fa-heartbeat" })
                         ]
                       ),
                       _vm._v(" "),
@@ -71037,7 +71042,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Patient ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Patient")]),
+        _c("th", [_vm._v("Patient Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tooth No.")]),
         _vm._v(" "),
@@ -72441,7 +72446,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fas fa-file-prescription" })]
+                        [_c("i", { staticClass: "fas fa-prescription" })]
                       ),
                       _vm._v(" "),
                       _c(

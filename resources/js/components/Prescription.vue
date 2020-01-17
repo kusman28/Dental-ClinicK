@@ -38,7 +38,7 @@
                                     -->
                                   <td>
                                     <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">
-                                        <i class="fas fa-file-prescription"></i>
+                                        <i class="fas fa-prescription"></i>
                                     </a>
                                     <a :href="'/pdfexport/' + treatment.id" class="btn btn-success btn-sm">Print
                                         <i class="fas fa-print"></i>

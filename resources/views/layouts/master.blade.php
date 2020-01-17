@@ -13,10 +13,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Dental ClinicK | Dashboard</title>
   <link rel="stylesheet" type="text/css" href="/css/app.css"><link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-  <style>
+  {{-- <style>
   .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
   .toggle.ios .toggle-handle { border-radius: 20px; }
-  </style>
+  </style> --}}
+  <style>
+    body::-webkit-scrollbar {
+    width: 0.4em;
+    }
+
+    body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    body::-webkit-scrollbar-thumb {
+    background-color: #52b6c4;
+    outline: 1px solid slategrey;
+    }
+    
+    .sidebar::-webkit-scrollbar {
+    width: 0.3em;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+    background-color: #52b6c4;
+    
+    outline: 1px solid slategrey;
+    }
+    
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -58,10 +87,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </form>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <div class="custom-control custom-switch">
+      {{-- <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" checked id="customSwitch1">
         <label class="custom-control-label" for="customSwitch1">Status</label>
-      </div>
+      </div> --}}
       {{-- <div class="checkbox">
         <label>Status:</label>
         <input type="checkbox" checked data-toggle="toggle" data-size="small" data-on="Available" data-off="Unvailable" data-style="ios" data-onstyle="success" data-offstyle="danger">

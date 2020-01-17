@@ -15,7 +15,7 @@
                             <thead>
                                 <tr>
                                     <th>Patient ID</th>
-                                    <th>Patient</th>
+                                    <th>Patient Name</th>
                                     <th>Tooth No.</th>
                                     <!-- <th>Prescription</th> -->
                                     <th>Status</th>
@@ -43,7 +43,7 @@
                                     -->
                                   <td>
                                     <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">Treatment 
-                                        <i class="fas fa-file-prescription"></i>
+                                        <i class="fas fa-heartbeat"></i>
                                     </a>
                                     <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)">
                                         <i class="fas fa-check"></i>
