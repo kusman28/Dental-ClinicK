@@ -116,7 +116,7 @@
 				</div>
 			</div>
 			<!-- item -->
-			<div class="hs-item set-bg text-white" data-setbg="img/slide-1.jpg">
+			<div class="hs-item set-bg text-white" data-setbg="img/mock-up.png">
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-7">
@@ -133,7 +133,7 @@
 
 
 	<!-- Banner section -->
-	<section class="banner-section">
+	{{-- <section class="banner-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 banner-text text-white">
@@ -450,7 +450,7 @@
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 		</div>
-	</footer>
+	</footer> --}}
 	<!-- Footer top section end -->
                                                 
 
