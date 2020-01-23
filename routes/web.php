@@ -35,4 +35,4 @@ Route::get('pdfexport/{id}', 'PDFController@pdfexport');
 // Route::resources(['treatment' => 'ExtractionController']);
 // Route::get('/brace', 'TreatmentController')->name('show');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+?)');
+// Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+?)');
