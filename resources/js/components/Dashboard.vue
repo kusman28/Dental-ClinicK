@@ -111,7 +111,6 @@
 </div>
 </div>
 </div>
-</div>
 </template>
 
 <script>
@@ -126,16 +125,15 @@ export default {
     },
     methods: {
       loadPatients()
-    {
-      axios.get('api/patient').then(({ data }) => (this.patients = data.data));
-      axios.get('treatment').then(({ data }) => (this.treatments = data.data));
-      axios.get('treatment/denture').then(({ data }) => (this.denture = data.data));
-      axios.get('treatment/extraction').then(({ data }) => (this.extraction = data.data));
+      {
+        axios.get('api/patient').then(({ data }) => (this.patients = data.data));
+        axios.get('treatment').then(({ data }) => (this.treatments = data.data));
+        axios.get('treatment/denture').then(({ data }) => (this.denture = data.data));
+        axios.get('treatment/extraction').then(({ data }) => (this.extraction = data.data));
+      },
     },
-    },
-      created(){
+    created(){
     this.loadPatients();
-
   },
 }
 </script>
