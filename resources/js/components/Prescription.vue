@@ -40,7 +40,7 @@
                                     <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">
                                         <i class="fas fa-prescription"></i>
                                     </a>
-                                    <a :href="'/pdfexport/' + treatment.id" class="btn btn-success btn-sm">Print
+                                    <a :href="'/pdfexport/' + treatment.id" class="btn btn-success btn-sm" disalbed>Print
                                         <i class="fas fa-print"></i>
                                     </a>
                                   </td>
