@@ -8,7 +8,7 @@
           <div class="col-md-12">
 
             <!-- The time line -->
-            <ul class="timeline" v-for="(activity, i) in activities" :key="i">
+            <ul class="timeline" v-for="activity in activities" :key="activity.id">
 
     <!-- timeline time label -->
     <br>
@@ -55,10 +55,20 @@
 
 <script>
 	export default {
-		data: ()=> ({
-			activities: [],
-		}),
+		data (){
+            return {
+                activities: {},
+            }
+        },
+        // methods: {
+        //     load(){
+        //         axios.get('/api/activities').then(response => {
+		// 		this.activities = response.data.data;
+		// 	})
+        //     }
+        // },
 		created(){
+            // this.load();
 			axios.get('/api/activities').then(response => {
 				this.activities = response.data;
 			})

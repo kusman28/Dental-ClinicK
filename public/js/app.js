@@ -1772,12 +1772,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      activities: []
+      activities: {}
     };
   },
+  // methods: {
+  //     load(){
+  //         axios.get('/api/activities').then(response => {
+  // 		this.activities = response.data.data;
+  // 	})
+  //     }
+  // },
   created: function created() {
     var _this = this;
 
+    // this.load();
     axios.get('/api/activities').then(function (response) {
       _this.activities = response.data;
     });
@@ -2067,7 +2075,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -68787,8 +68794,8 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-md-12" },
-        _vm._l(_vm.activities, function(activity, i) {
-          return _c("ul", { key: i, staticClass: "timeline" }, [
+        _vm._l(_vm.activities, function(activity) {
+          return _c("ul", { key: activity.id, staticClass: "timeline" }, [
             _c("br"),
             _vm._v(" "),
             _c("li", { staticClass: "time-label" }, [
@@ -69631,7 +69638,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "info-box-content" }, [
                 _c("span", { staticClass: "info-box-text" }, [
-                  _vm._v("Patient")
+                  _vm._v("Patients")
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "info-box-number" }, [

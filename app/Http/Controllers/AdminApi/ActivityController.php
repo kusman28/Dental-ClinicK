@@ -13,15 +13,10 @@ class ActivityController extends Controller
     public function index()
     {
 
-        $activities = auth()->user()->actions->load('causer');
+        // $activities = auth()->user()->actions->load('causer');
         
-
-    	// return Activity::latest()->paginate(10);
-    	return $activities;
+        $activities = auth()->user()->actions()->with('causer')->latest()->get();
+    	// $activities = Activity::with('causer')->where('causer_id', auth()->user()->id)->latest()->get();
+        return $activities;
     }
-
-    //     public function index()
-    // {
-    //     return Activity::latest()->paginate(10);
-    // }
 }
