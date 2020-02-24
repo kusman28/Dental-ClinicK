@@ -14,22 +14,20 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Patient</th>
                                     <th>Tooth Part</th>
-                                    <!-- <th>Prescription</th> -->
                                     <th>Amount Charge</th>
                                     <th>Balance</th>
                                     <th>Payment Status</th>
-                                    <!-- <th>Balance</th>
-                                    <th>Status</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="treatment in treatments.data" :key="treatment.id">
+                                    <td>{{treatment.id}}</td>
                                     <td>{{treatment.patient}}</td>
                                     <td>{{treatment.tooth_no}}</td>
-                                    <!-- <td>{{treatment.procedure}}</td> -->
                                     <td>₱{{treatment.amount_charge}}</td>
                                     <td>₱{{treatment.balance}}</td>
                                     <td><span :class="[treatment.status === 'Fully Paid' ? 'badge-success' : (treatment.status === 'Partial'?'badge-danger':'badge-primary'), 'badge badge-pill']">{{treatment.status}}</span>
@@ -203,8 +201,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success btn-flat">Save</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close <i class="fas fa-times"></i></button>
+                        <button type="submit" class="btn btn-success">Save <i class="fas fa-check"></i></button>
                     </div>
                     </form>
                 </div>

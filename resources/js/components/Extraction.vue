@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4">
+                <h3 class="card-title">Extraction Patients</h3>
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Extraction Patients</h3>
+                    <!-- <div class="card-header">
                         <div class="card-tools">
-                        <!-- <button type="submit" class="btn btn-success btn-sm" @click="newModal">Add Patient <i class="fas fa-user-plus"></i></button> -->
+                        <button type="submit" class="btn btn-success btn-sm" @click="newModal">Add Patient <i class="fas fa-user-plus"></i></button>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
@@ -17,24 +17,20 @@
                                     <th>Patient ID</th>
                                     <th>Patient Name</th>
                                     <th>Tooth No.</th>
-                                    <!-- <th>Prescription</th> -->
-                                    <th>Status</th>
                                     <th>Amount Charge</th>
-                                    <th>Status</th>
-                                    <!-- <th>Balance</th>
-                                    <th>Status</th> -->
+                                    <th>Balance</th>
+                                    <th>Payment Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="treatment in treatments" :key="treatment.id">
+                                <tr v-for="treatment in treatments.data" :key="treatment.id">
                                     <td>{{treatment.id}}</td>
                                     <td>{{treatment.patient | upCase}}</td>
                                     <td>{{treatment.tooth_no}}</td>
-                                    <!-- <td>{{treatment.procedure}}</td> -->
-                                    <td>{{treatment.status}}</td>
-                                    <td>₱ {{treatment.amount_charge}}</td>
-                                    <td><span :class="[treatment.amount_paid === 'PAID' ? 'badge-success' : (treatment.amount_paid === 'UNPAID'?'badge-danger':'badge-primary'), 'badge badge-pill']">{{treatment.amount_paid}}</span>
+                                    <td>₱{{treatment.amount_charge}}</td>
+                                    <td>₱{{treatment.balance}}</td>
+                                    <td><span :class="[treatment.status === 'Fully Paid' ? 'badge-success' : (treatment.status === 'Partial'?'badge-danger':'badge-primary'), 'badge badge-pill']">{{treatment.status}}</span>
                                     </td>
                                     <!-- <td>{{treatment.amount_paid}}</td>
                                     <td>{{treatment.balance}}</td>
@@ -54,6 +50,10 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
+                    <div class="card-footer">
+                    <pagination :data="treatments" @pagination-change-page="getResults">
+                    </pagination>
+					</div>
                 </div>
                 <!-- /.card -->
             </div>
@@ -71,7 +71,7 @@
                         </button>
                     </div>
                     <form @submit.prevent="updateTreatment()">
-                    <img style="height: 350px; float: right;" src="img/Tooth Legend.png">
+                    <img class="mt-5" style="height: 350px; float: right;" src="img/Tooth Legend.png">
                     <div class="modal-body col-md-6">
                         <label>Patient</label>
                         <div class="form-group">
@@ -97,33 +97,57 @@
                         <textarea class="form-control" v-model="form.procedure" name="procedure" placeholder="Prescription"></textarea>
                         </div>
                         <div class="form-group">
-                            <input v-model="form.status" type="text" name="status"
-                            placeholder="Status" 
-                            class="form-control ucfirst" :class="{ 'is-invalid': form.errors.has('status') }">
-                            <has-error :form="form" field="status"></has-error>
-                        </div>
-                        <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                 <span class="input-group-text">₱</span>
                                 </div>
                                 <input type="text" v-model="form.amount_charge" name="amount_charge" class="form-control" placeholder="Amount Charge"  :class="{ 'is-invalid': form.errors.has('amount_charge') }">
                                 <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
+                                <!-- <span class="input-group-text">.00</span> -->
                                 </div>
                                 <has-error :form="form" field="amount_charge"></has-error>
                             </div>
                         </div>
                         <div class="form-group">
-                        <textarea class="form-control" v-model="form.notes" name="notes" placeholder="Notes"></textarea>
-                        </div>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                                </div>
+                                <input type="text" v-model="form.amount_paid" name="amount_paid" class="form-control" placeholder="Amount Paid"  :class="{ 'is-invalid': form.errors.has('amount_paid') }">
+                                <div class="input-group-append">
+                                <!-- <span class="input-group-text">.00</span> -->
+                                </div>
+                                <has-error :form="form" field="amount_paid"></has-error>
+                            </div>
+                            <has-error :form="form" field="amount_paid"></has-error>
+                        </div>
+                        <div class="form-group">
+                            <label>Balance:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                                </div>
+                                <input type="text" class="form-control" 
+                                :value="form.amount_charge-form.amount_paid"
+                                placeholder="Balance">
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                            <input type="hidden" name="balance"
+                            v-model="form.balance"
+                            placeholder="Balance" 
+                            class="form-control ucfirst" :class="{ 'is-invalid': form.errors.has('balance') }"
+                            >
+                            <!-- :value="form.amount_charge-form.amount_paid" -->
+                            <has-error :form="form" field="balance"></has-error>
+                        </div>                         
                         <div class="form-group">
                         &nbsp;
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success btn-flat">Save</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close <i class="fas fa-times"></i></button>
+                        <button type="submit" class="btn btn-success">Save <i class="fas fa-check"></i></button>
                     </div>
                     </form>
                 </div>
@@ -164,19 +188,19 @@
                         </div>
                         <label>Status</label>
                         <div class="form-group">
-                            <select name="amount_paid" v-model="form.amount_paid" id="amount_paid" class="form-control" :class="{ 'is-invalid': form.errors.has('amount_paid') }">
-                                <option value="PAID">PAID</option>
-                                <option value="UNPAID">UNPAID</option>
+                            <select name="status" v-model="form.status" id="status" class="form-control" :class="{ 'is-invalid': form.errors.has('amount_paid') }">
+                                <option value="Partial">Partial</option>
+                                <option value="Fully Paid">Fully Paid</option>
                             </select>
-                            <has-error :form="form" field="amount_paid"></has-error>
+                            <has-error :form="form" field="status"></has-error>
                         </div>                  
                         <div class="form-group">
                         &nbsp;
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success btn-flat">Save</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close <i class="fas fa-times"></i></button>
+                        <button type="submit" class="btn btn-success">Save <i class="fas fa-check"></i></button>
                     </div>
                     </form>
                 </div>
@@ -197,8 +221,8 @@ export default {
                 patient: '',
                 tooth_no: '',
                 procedure: '',
-                amount_charge: '',
-                amount_paid: '',
+                amount_charge: 0,
+                amount_paid: 0,
                 balance: '',
                 type: '',
                 status: ''
@@ -206,6 +230,12 @@ export default {
         }
     },
     methods: {
+        getResults(page = 1) {
+        axios.get('treatment/extraction?page=' + page)
+            .then(response => {
+                this.treatments = response.data;
+            });
+		},
         updateTreatment()
         {
             this.$Progress.start();
@@ -260,7 +290,7 @@ export default {
         },
         loadTreatment()
         {
-            axios.get('treatment/extraction').then(({ data }) => (this.treatments = data.data));
+            axios.get('treatment/extraction').then(({ data }) => (this.treatments = data));
         },
     },
     created(){
