@@ -14,7 +14,7 @@ class TreatmentController extends Controller
      */
     public function index()
     {
-        return Treatment::latest('patient')->where('type', '=', 'Brace')->paginate(15);
+        return Treatment::latest('patient')->where('type', '=', 'Brace')->paginate(5);
         // return Treatment::latest()->paginate(5);
     }
 
@@ -93,16 +93,26 @@ class TreatmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $treatment = Treatment::findOrFail($id);
+
         $this->validate($request, [
             'patient' => 'required|string|max:50',
             'tooth_no' => 'string|max:15',
             'amount_charge' => 'numeric|min:100',
             'amount_paid' => 'max:100',
+            'balance' => 'max:100',
+            'status' => 'max:100',
         ]);
 
-        $treatment = Treatment::findOrFail($id);
+        $treatment->patient = $request->input('patient');
+        $treatment->status = $request->input('status');
+        $treatment->tooth_no = $request->input('tooth_no');
+        $treatment->amount_charge = $request->input('amount_charge');
+        $treatment->amount_paid = $request->input('amount_paid');
+        $treatment->balance = ((int)$treatment->amount_charge - (int)$treatment->amount_paid);
 
-        $treatment->update($request->all());
+        $treatment->update();
+        // $treatment->update($request->all());
     }
 
     /**

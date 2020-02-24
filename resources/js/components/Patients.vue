@@ -2,11 +2,20 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-4">
+				<h3 class="card-title">List of Patient</h3>
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">List of Patients</h3>
+						<div class="col-md-4 input-group input-group-sm">
+								<input class="form-control form-control-navbar" @keyup="searchit" v-model="search" type="search" placeholder="Search" aria-label="Search">
+
+								<div class="input-group-append">
+								<button class="btn btn-navbar btn-success" @click="searchit">
+									<i class="fas fa-search"></i>
+								</button>
+								</div>
+							</div>
 						<div class="card-tools">
-                		<button type="submit" class="btn btn-success btn-sm" @click="newModal">Add Patient <i class="fas fa-user-plus"></i></button>
+                		<button type="submit" class="btn btn-success btn-sm mt-1" @click="newModal">Add Patient <i class="fas fa-user-plus"></i></button>
 						</div>
 					</div>
 					<!-- /.card-header -->
@@ -24,26 +33,32 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="patient in patients" :key="patient.id">
+								<tr v-for="patient in patients.data" :key="patient.id">
 									<td>{{patient.id}}</td>
 									<td>{{patient.firstname | upCase}} {{patient.middlename | upCase}} {{patient.lastname |upCase}}</td>
 									<td>{{patient.created_at | myDate}}</td>
 									<!-- <td>{{patient.address}}</td> -->
 									<td>{{patient.contact_no}}</td>
-									<td><span :class="[patient.type === 'Denture' ? 'badge-success' : (patient.type === 'Brace'?'badge-warning':'badge-primary'), 'badge badge-pill']">{{patient.type | upCase}}</span>
+									<td><span :class="[patient.type === 'Denture' ? 'badge-success' : (patient.type === 'Brace'?'badge-warning':'badge-primary'), 'badge badge-pill']">{{patient.type | allCaps}}</span>
 									</td>
 			                      <td>
-			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(patient)">
+			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(patient)">Edit
 			                      		<i class="fas fa-edit"></i>
 			                      	</a>
-			                      	|
-			                      	<a href="#" @click="deletePatient(patient.id)">
+			                      	
+			                      	<!-- <a href="#" class="btn btn-outline-danger btn-sm" @click="deletePatient(patient.id)">
 			                      		<i class="fas fa-trash red"></i>
-			                      	</a>
+			                      	</a> -->
 			                      </td>
 								</tr>
 							</tbody>
 						</table>
+					</div>
+					<div class="card-footer">
+						<pagination :data="patients" @pagination-change-page="getResults">
+								<!-- <span slot="prev-nav">&lt; Previous</span>
+								<span slot="next-nav">Next &gt;</span> -->
+						</pagination>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -112,9 +127,9 @@
         				</div>
         			</div>
         			<div class="modal-footer">
-        				<button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-        				<button v-show="editmode" type="submit" class="btn btn-primary btn-flat">Update</button>
-        				<button v-show="!editmode" type="submit" class="btn btn-success btn-flat">Save</button>
+        				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close <i class="fas fa-times"></i></button>
+        				<button v-show="editmode" type="submit" class="btn btn-primary">Update <i class="fas fa-check"></i></button>
+        				<button v-show="!editmode" type="submit" class="btn btn-success">Save <i class="fas fa-check"></i></button>
         			</div>
         			</form>
         		</div>
@@ -128,8 +143,9 @@
 export default {
 	data() {
 		return {
-		editmode: false,
+			editmode: false,
 			patients: {},
+			search: '',
 			form: new Form({
 				id: '',
 				fullname: '',
@@ -144,6 +160,15 @@ export default {
 		}
 	},
 	methods: {
+		searchit: _.debounce(() => {
+		Fire.$emit('searching');
+		},0.700),
+		getResults(page = 1) {
+			axios.get('api/patient?page=' + page)
+				.then(response => {
+					this.patients = response.data;
+				});
+		},
 		updatePatient()
 		{
 			this.$Progress.start();
@@ -180,7 +205,7 @@ export default {
 		{
 		swal.fire({
 			title: 'Are you sure?',
-			text: "You are going to delete this user",
+			text: "You are about to delete this user.",
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
@@ -205,7 +230,7 @@ export default {
 		},
 		loadPatients()
 		{
-			axios.get('api/patient').then(({ data }) => (this.patients = data.data));
+			axios.get('api/patient').then(({ data }) => (this.patients = data));
 		},
 		createPatient() 
 		{
@@ -226,6 +251,16 @@ export default {
 		}
 	},
 	created(){
+		Fire.$on('searching', () => {
+			let query = this.search;
+			axios.get('api/find?q=' + query)
+			.then((data) => {
+				this.patients = data.data
+			})
+			.catch(() => {
+
+			})
+		});
 		this.loadPatients();
 		Fire.$on('afterCreate',() => {
 			this.loadPatients();

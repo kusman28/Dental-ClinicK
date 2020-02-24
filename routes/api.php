@@ -22,6 +22,8 @@ Route::post('/login', 'API\UserController@login');
 Route::get('profile', 'API\UserController@profile');
 Route::put('profile', 'API\UserController@updateProfile');
 
+Route::get('find', 'API\PatientController@search');
+
 Route::apiResources(['user' => 'API\UserController']);
 Route::apiResources(['patient' => 'API\PatientController']);
 Route::apiResources(['activities' => 'AdminApi\ActivityController']);

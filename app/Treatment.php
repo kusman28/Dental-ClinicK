@@ -13,6 +13,7 @@ class Treatment extends Model
     	'status',
         'amount_charge',
         'amount_paid',
+        'balance',
     	'type'
     ];
 

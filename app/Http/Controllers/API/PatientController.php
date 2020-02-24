@@ -17,7 +17,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return Patient::latest()->paginate(25);
+        return Patient::latest()->paginate(5);
     }
 
     /**
@@ -126,5 +126,21 @@ class PatientController extends Controller
         //     "error" => "0",
         //     "message" => "Success"
         // ]);
+    }
+
+    public function search() {
+
+        if ($search = \Request::get('q')) {
+            $patient = Patient::where(function($query) use ($search){
+                $query->where('fullname','LIKE',"%$search%")
+                ->orWhere('type','LIKE',"%$search%")
+                ->orWhere('created_at','LIKE',"%$search%");
+            })->paginate(20);
+        } else {
+            $patient = Patient::latest()->paginate(5);
+        }
+
+        return $patient;
+
     }
 }

@@ -63,6 +63,8 @@ Vue.use(VueProgressBar, {
   height: '3px'
 })
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 // Load Data
 window.Fire = new Vue();
 
@@ -70,6 +72,10 @@ window.Fire = new Vue();
 Vue.filter('upCase', function(text){
 	// return text.toUpperCase();
   return text.charAt(0).toUpperCase() + text.slice(1)
+});
+Vue.filter('allCaps', function(text){
+	return text.toUpperCase();
+  // return text.charAt(0).toUpperCase() + text.slice(1)
 });
 Vue.filter('myDate', function(created){
   return moment(created).format('MMMM Do YYYY');

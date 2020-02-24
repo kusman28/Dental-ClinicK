@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </style> --}}
   <style>
     body::-webkit-scrollbar {
-    width: 0.4em;
+    width: 0.6em;
     }
 
     body::-webkit-scrollbar-track {
@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </button>
         </div>
       </div> -->
-<form class="form-inline ml-3">
+{{-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
 
@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       {{-- <div class="custom-control custom-switch">
