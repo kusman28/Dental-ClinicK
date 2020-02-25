@@ -2,11 +2,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4">
+            <h3 class="card-title">Medical History</h3>
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Treatments</h3>
-                        <div class="card-tools">
-                        <!-- <button type="submit" class="btn btn-success btn-sm" @click="newModal">Add Patient <i class="fas fa-user-plus"></i></button> -->
+                        <div class="col-md-4 input-group input-group-sm">
+                            <input class="form-control form-control-navbar" @keyup="searchit" v-model="search" type="search" placeholder="Search" aria-label="Search">
+
+                            <div class="input-group-append">
+                            <button class="btn btn-navbar btn-success" @click="searchit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -17,7 +23,7 @@
                                     <th>ID</th>
                                     <th>Patient</th>
                                     <th>Tooth No.</th>
-                                    <th>Prescription</th>
+                                    <th>Date of Session</th>
                                     <!-- <th>Date</th> -->
                                     <!-- <th>Balance</th>
                                     <th>Status</th> -->
@@ -25,11 +31,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="treatment in treatments" :key="treatment.id">
-                                    <td>{{treatment.id}}</td>
-                                    <td>{{treatment.fullname}}</td>
-                                    <td>{{treatment.tooth_no}}</td>
-                                    <td>{{treatment.procedure}}</td>
+                                <tr v-for="record in records.data" :key="record.id">
+                                    <td>{{record.id}}</td>
+                                    <td>{{record.fullname}}</td>
+                                    <td>{{record.tooth_no}}</td>
+                                    <td>{{record.created_at | myDate}}</td>
                                     <!-- <td>{{treatment.updated_at | myDate}}</td> -->
                                     <!-- <td>{{treatment.amount_paid}}</td>
                                     <td>{{treatment.balance}}</td>
@@ -37,10 +43,10 @@
                                         <i :class="[treatment.status === 'On-going' ? 'fas fa-clock' : (treatment.status === 'Done'?'fas fa-check':'badge-primary')]"></i></span></td>
                                     -->
                                   <td>
-                                    <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">Prescription
+                                    <!-- <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">Prescription
                                         <i class="fas fa-prescription"></i>
-                                    </a>
-                                    <a :href="'/pdfexport/' + treatment.id" target="_blank" class="btn btn-success btn-sm">Print
+                                    </a> -->
+                                    <a :href="'/pdfExportMedical/' + record.id" target="_blank" class="btn btn-success btn-sm">Print
                                         <i class="fas fa-print"></i>
                                     </a>
                                   </td>
@@ -48,6 +54,12 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="card-footer">
+						<pagination :data="records" @pagination-change-page="getResults">
+								<!-- <span slot="prev-nav">&lt; Previous</span>
+								<span slot="next-nav">Next &gt;</span> -->
+						</pagination>
+					</div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -196,21 +208,27 @@
 export default {
     data() {
         return {
-            treatments: {},
+            records: {},
+            search: '',
             form: new Form({
                 id: '',
+                patient_id: '',
                 fullname: '',
                 tooth_no: '',
                 procedure: '',
-                amount_charge: '',
-                amount_paid: '',
-                balance: '',
-                type: '',
-                status: ''
             })
         }
     },
     methods: {
+        searchit: _.debounce(() => {
+		Fire.$emit('searching');
+		},0.700),
+		getResults(page = 1) {
+        axios.get('record?page=' + page)
+            .then(response => {
+                this.records = response.data;
+            });
+		},
         updateTreatment()
         {
             this.$Progress.start();
@@ -239,11 +257,21 @@ export default {
         },
         loadTreatment()
         {
-            axios.get('pdf').then(({ data }) => (this.treatments = data.data));
+            axios.get('record').then(({ data }) => (this.records = data));
         },
         
     },
     created(){
+        Fire.$on('searching', () => {
+            let query = this.search;
+            axios.get('/find?q=' + query)
+            .then((data) => {
+                this.records = data.data
+            })
+            .catch(() => {
+
+            })
+		});
         this.loadTreatment();
         Fire.$on('afterCreate',() => {
             this.loadTreatment();

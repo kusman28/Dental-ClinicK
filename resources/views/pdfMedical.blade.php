@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{$treatment->fullname}}</title>
+	<title>{{$record->fullname}}</title>
 
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<style type="text/css">
@@ -20,6 +20,11 @@
 	.address{
 		margin: 0;
 	}
+	}
+	.address1{
+		margin: 0;
+        font-size: 24px;
+	}
 	.footer-wrapper{
 		position: absolute;
 		bottom: 0;
@@ -28,7 +33,7 @@
 </style>
 </head>
 <body>
-	<p style="font-size: 12px; float: right;">Appointment Date: {{$treatment->created_at->format('d/m/y')}}</p><br>
+	{{-- <p style="font-size: 12px; float: right;">Appointment Date: {{$record->created_at->format('d/m/y')}}</p><br> --}}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -36,14 +41,12 @@
 					<div class="header-wrapper">
 						<img class="logo" src="img/clinick-logo.png">
 						<p class="address">Tumaga, Zamboanga City <br> 09363242353</p>
+						<p class="mt-4 address1">Medical History</p>
 					</div>
-					<p>Patient Name: <b>{{$treatment->fullname}}</b></p>
-					<p>Patient Type: <b>{{$treatment->type}}</b></p>
-					<p>Prescription: <i>{{$treatment->procedure}}</i></p>
-					<p>Amount Charge: <b><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>{{$treatment->amount_charge}}</b></p>
-					<p>Amount Paid: <b><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>{{$treatment->amount_paid}}</b></p>
-					<p>Balance: <b><u><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>{{$treatment->balance}}</u></b></p>
-					<p>Payment Status: <b><u>{{$treatment->status}}</u></b></p>
+					<p>Patient Name: <b>{{$record->fullname}}</b></p>
+					<p>Tooth Part/No.: <b>{{$record->tooth_no}}</b></p>
+					<p>Prescription: <i>{{$record->procedure}}</i></p>
+					<p>Date of Session: <b>{{date('d-m-Y', strtotime($record->created_at))}}</b></p>
 					{{-- <table class="table table-bordered">
 						<thead>
 							<tr>

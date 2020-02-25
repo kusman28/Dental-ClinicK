@@ -33,9 +33,8 @@
 			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(user)">
 			                      		<i class="fas fa-edit"></i>
 			                      	</a>
-			                      	|
-			                      	<a href="#" @click="deletePatient(user.id)">
-			                      		<i class="fas fa-trash red"></i>
+			                      	<a href="#" class="btn btn-outline-danger btn-sm" @click="deletePatient(user.id)">
+			                      		<i class="fas fa-trash"></i>
 			                      	</a>
 			                      </td>
 								</tr>
@@ -97,9 +96,9 @@
         				</div>
         			</div>
         			<div class="modal-footer">
-        				<button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-        				<button v-show="editmode" type="submit" class="btn btn-primary btn-flat">Update</button>
-        				<button v-show="!editmode" type="submit" class="btn btn-success btn-flat">Save</button>
+        				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close <i class="fas fa-times"></i></button>
+        				<button v-show="editmode" type="submit" class="btn btn-primary">Update <i class="fas fa-check"></i></button>
+        				<button v-show="!editmode" type="submit" class="btn btn-success">Save <i class="fas fa-check"></i></button>
         			</div>
         			</form>
         		</div>

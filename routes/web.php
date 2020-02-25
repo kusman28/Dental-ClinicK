@@ -25,9 +25,12 @@ Route::get('treatment/allpatient', 'TreatmentController@allPatient');
 
 
 Route::resources(['treatment' => 'TreatmentController']); 
+Route::resources(['record' => 'RecordsController']); 
 
 Route::resources(['pdf' => 'PDFController']); 
 Route::get('pdfexport/{id}', 'PDFController@pdfexport');
+Route::get('pdfExportMedical/{id}', 'RecordsController@pdfExportMedical');
+Route::get('find', 'RecordsController@search');
 
 // Route::resources(['treatment' => 'DentureController']);
 // Route::resources(['brace' => 'BraceController']);

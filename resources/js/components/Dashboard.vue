@@ -32,7 +32,7 @@
                 {{treatments.length}}
               </span>
               <router-link to="/brace" class="small-box-footer">View Details
-                  <i class="fas fa-arrow-right"></i>
+                  <i class="fas fa-chevron-right"></i>
                 </router-link>
             </div>
             <!-- /.info-box-content -->
@@ -54,7 +54,7 @@
               {{extraction.length}}
             </span>
               <router-link to="/extraction" class="small-box-footer">View Details
-                  <i class="fas fa-arrow-right"></i>
+                  <i class="fas fa-chevron-right"></i>
                 </router-link>
         </div>
         <!-- /.info-box-content -->
@@ -71,7 +71,7 @@
         <span class="info-box-number">{{denture.length}}</span>
 
           <router-link to="/denture" class="small-box-footer">View Details
-                  <i class="fas fa-arrow-right"></i>
+                  <i class="fas fa-chevron-right"></i>
             </router-link>
     </div>
     <!-- /.info-box-content -->

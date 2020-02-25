@@ -176,7 +176,7 @@ export default {
 			.then(() => {
 			$('#addNew').modal('hide');
 			swal.fire(
-				'Updated!',
+				'Updated',
 				'Patient information updated.',
 				'success'
 				)
@@ -216,7 +216,7 @@ export default {
 			if (result.value) {	
 				this.form.delete('api/patient/'+id).then(()=>{
 						swal.fire(
-						'Deleted!',
+						'Deleted',
 						'Your file has been deleted.',
 						'success'
 						)

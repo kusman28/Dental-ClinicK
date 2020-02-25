@@ -191,7 +191,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </router-link>
             </li> --}}
             <li class="nav-item">
-              <router-link to="/report" class="nav-link">
+              <router-link to="/records" class="nav-link">
                 <i class="nav-icon fas fa-print"></i>
                 <p>
                   Records
@@ -218,9 +218,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             <li class="nav-item">
               <router-link to="/activities" class="nav-link">
-                <i class="nav-icon fas fa-stream"></i>
+                <i class="nav-icon fas fa-info-circle"></i>
                 <p>
-                  Activity Log
+                  My Activity
                 </p>
               </router-link>
             </li>

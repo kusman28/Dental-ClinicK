@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Treatment;
 use App\Record;
 use PDF;
+use Illuminate\Http\Request;
 
-class PDFController extends Controller
+class RecordsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class PDFController extends Controller
      */
     public function index()
     {
-        return Treatment::latest('fullname')->paginate(10);
+        return Record::latest('fullname')->paginate(4);
     }
 
     /**
@@ -43,23 +42,21 @@ class PDFController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Record $record)
     {
-        $pdf = Treatment::findOrFail($id);
-
-        return $pdf;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Record $record)
     {
         //
     }
@@ -68,10 +65,10 @@ class PDFController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Record $record)
     {
         //
     }
@@ -79,19 +76,34 @@ class PDFController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Record $record)
     {
         //
     }
 
-    public function pdfexport($id){
-        $treatment = Treatment::find($id);
-        $pdf = PDF::loadView('pdf', ['treatment' => $treatment])->setPaper('a4', 'portrait');
+    public function pdfExportMedical($id){
+        $record = Record::find($id);
+        $pdf = PDF::loadView('pdfMedical', ['record' => $record])->setPaper('a4', 'portrait');
 
-        $fileName = $treatment->name;
+        $fileName = $record->name;
         return $pdf->stream($fileName . '.pdf');
+    }
+
+    public function search() {
+
+        if ($search = \Request::get('q')) {
+            $record = Record::where(function($query) use ($search){
+                $query->where('fullname','LIKE',"%$search%")
+                ->orWhere('created_at','LIKE',"%$search%");
+            })->paginate(20);
+        } else {
+            $record = Record::latest()->paginate(5);
+        }
+
+        return $record;
+
     }
 }

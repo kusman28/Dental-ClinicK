@@ -5,16 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Treatment extends Model
-{
+{   
+    protected $table = 'treatment';
     protected $fillable = [
-        'patient',
+        'fullname',
     	'tooth_no',
         'procedure',
-    	'status',
         'amount_charge',
         'amount_paid',
         'balance',
-    	'type'
+    	'type',
+    	'status'
     ];
 
     // public function patients()

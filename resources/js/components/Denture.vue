@@ -14,7 +14,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Patient ID</th>
+                                    <th>ID</th>
                                     <th>Patient Name</th>
                                     <th>Tooth No.</th>
                                     <th>Amount Charge</th>
@@ -26,7 +26,7 @@
                             <tbody>
                                 <tr v-for="treatment in treatments.data" :key="treatment.id">
                                     <td>{{treatment.id}}</td>
-                                    <td>{{treatment.patient | upCase}}</td>
+                                    <td>{{treatment.fullname | upCase}}</td>
                                     <td>{{treatment.tooth_no}}</td>
                                     <td>₱{{treatment.amount_charge}}</td>
                                     <td>₱{{treatment.balance}}</td>
@@ -36,8 +36,8 @@
                                       <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)">Treatment 
                                         <i class="fas fa-heartbeat"></i>
                                     </a>
-                                    <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)">
-                                        <i class="fas fa-check"></i>
+                                    <a href="#" class="btn btn-outline-success btn-sm" @click="editTreatment1(treatment)" title="Payment">Payment
+                                        <i class="fas fa-money-bill"></i>
                                     </a>
                                   </td>
                                 </tr>
@@ -213,7 +213,7 @@ export default {
             treatments: {},
             form: new Form({
                 id: '',
-                patient: '',
+                fullname: '',
                 tooth_no: '',
                 procedure: '',
                 amount_charge: 0,
@@ -238,7 +238,7 @@ export default {
             .then(() => {
             $('#treatmentModal').modal('hide');
             swal.fire(
-                'Updated!',
+                'Updated',
                 'Patient information updated.',
                 'success'
                 )

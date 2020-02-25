@@ -29,7 +29,7 @@ let routes = [
   { path: '/extraction', component: require('./components/Extraction').default },
   { path: '/prescription', component: require('./components/Prescription').default },
   { path: '/payment', component: require('./components/Payment').default },
-  { path: '/report', component: require('./components/Report').default },
+  { path: '/records', component: require('./components/Record').default },
   { path: '/users', component: require('./components/Users').default },
   { path: '/profile', component: require('./components/Profile').default},
   { path: '/activities', component: require('./components/Activities').default},

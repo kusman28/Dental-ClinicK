@@ -26,7 +26,7 @@
                             <tbody>
                                 <tr v-for="treatment in treatments.data" :key="treatment.id">
                                     <td>{{treatment.id}}</td>
-                                    <td>{{treatment.patient}}</td>
+                                    <td>{{treatment.fullname}}</td>
                                     <td>{{treatment.tooth_no}}</td>
                                     <td>₱{{treatment.amount_charge}}</td>
                                     <td>₱{{treatment.balance}}</td>
@@ -41,8 +41,8 @@
                                     <a href="#" class="btn btn-primary btn-sm" @click="editTreatment(treatment)" title="Treatment">Treatment 
                                         <i class="fas fa-heartbeat"></i>
                                     </a>
-                                    <a href="#" class="btn btn-success btn-sm" @click="editTreatment1(treatment)" title="Payment">
-                                        <i class="fas fa-check"></i>
+                                    <a href="#" class="btn btn-outline-success btn-sm" @click="editTreatment1(treatment)" title="Payment">Payment
+                                        <i class="fas fa-money-bill"></i>
                                     </a>
                                   </td>
                                 </tr>
@@ -77,7 +77,7 @@
                     <div class="modal-body col-md-6">
                         <label>Patient</label>
                         <div class="form-group">
-                            <input v-model="form.patient" type="text" name="patient"
+                            <input v-model="form.fullname" type="text" name="fullname"
                             placeholder="Patient" 
                             class="form-control" disabled>
                         </div>
@@ -162,7 +162,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="treatmentModal1Label">Treatment</h5>
+                        <h5 class="modal-title" id="treatmentModal1Label">Payment</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -171,7 +171,7 @@
                     <div class="modal-body col-md-8">
                         <label>Patient</label>
                         <div class="form-group">
-                            <input v-model="form.patient" type="text" name="patient"
+                            <input v-model="form.fullname" type="text" name="fullname"
                             placeholder="Patient" 
                             class="form-control" disabled>
                         </div>
@@ -188,7 +188,7 @@
                                 <has-error :form="form" field="amount_charge"></has-error>
                             </div>
                         </div>
-                        <label>Status</label>
+                        <label>Payment Status</label>
                         <div class="form-group">
                             <select name="status" v-model="form.status" id="status" class="form-control" :class="{ 'is-invalid': form.errors.has('amount_paid') }">
                                 <option value="Partial">Partial</option>
@@ -219,7 +219,7 @@ export default {
             treatments: {},
             form: new Form({
                 id: '',
-                patient: '',
+                fullname: '',
                 tooth_no: '',
                 procedure: '',
                 amount_charge: 0,
@@ -263,7 +263,7 @@ export default {
             .then(() => {
             $('#treatmentModal1').modal('hide');
             swal.fire(
-                'Updated!',
+                'Updated',
                 'Patient information updated.',
                 'success'
                 )

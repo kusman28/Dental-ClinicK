@@ -38,7 +38,7 @@ class PatientController extends Controller
         ]);
 
         Treatment::create([
-            'patient' => $request['firstname'].' '.$request['middlename'].' '.$request['lastname'],
+            'fullname' => $request['firstname'].' '.$request['middlename'].' '.$request['lastname'],
             'type' => $request['type'],
         ]);
 

@@ -42,7 +42,6 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'type' => $request['type'],
-            'photo' => $request['photo'],
             'password' => Hash::make($request['password']),
         ]);
 
