@@ -76056,7 +76056,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _c(
-                        "a",
+                        "button",
                         {
                           staticClass: "btn btn-primary btn-sm",
                           attrs: { href: "#" },
@@ -76070,10 +76070,10 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c(
-                        "a",
+                        "button",
                         {
                           staticClass: "btn btn-outline-danger btn-sm",
-                          attrs: { href: "#" },
+                          attrs: { href: "#", disabled: user.type == "Admin" },
                           on: {
                             click: function($event) {
                               return _vm.deletePatient(user.id)

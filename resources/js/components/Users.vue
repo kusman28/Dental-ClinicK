@@ -30,12 +30,12 @@
 									<!-- <td>{{patient.address}}</td> -->
 									<td><span :class="[user.type === 'Admin' ? 'badge-success' : (user.type === 'Assisstant'?'badge-primary':'badge-primary'), 'badge badge-pill']">{{user.type}}</span></td>
 			                      <td>
-			                      	<a href="#" class="btn btn-primary btn-sm" @click="editModal(user)">
+			                      	<button href="#" class="btn btn-primary btn-sm" @click="editModal(user)">
 			                      		<i class="fas fa-edit"></i>
-			                      	</a>
-			                      	<a href="#" class="btn btn-outline-danger btn-sm" @click="deletePatient(user.id)">
+			                      	</button>
+			                      	<button href="#" class="btn btn-outline-danger btn-sm" @click="deletePatient(user.id)" :disabled="user.type == 'Admin'">
 			                      		<i class="fas fa-trash"></i>
-			                      	</a>
+			                      	</button>
 			                      </td>
 								</tr>
 							</tbody>
@@ -112,7 +112,7 @@
 export default {
 	data() {
 		return {
-		editmode: false,
+			editmode: false,
 			users: {},
 			form: new Form({
 				id: '',
