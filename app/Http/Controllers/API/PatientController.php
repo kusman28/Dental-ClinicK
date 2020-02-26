@@ -17,7 +17,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return Patient::latest()->paginate(5);
+        return Patient::latest()->paginate(100);
     }
 
     /**
